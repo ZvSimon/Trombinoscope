@@ -1,0 +1,66 @@
+.empcontainer{
+    display: flex;
+    justify-content: center;
+ }
+.employee {
+    
+   background-color: #212121;
+   position: absolute;
+   width: 34rem;
+   margin: 30px ;
+    height: 63rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 3px 18px 3px rgb(0 0 0 / 20%);
+    box-shadow: 0px 3px 18px 3px rgb(0 0 0 / 20%);
+}
+.card-header {
+    background-image: linear-gradient(to bottom right, #b3943e, #7c6250);
+    padding: 12px 27px 7px !important;
+    position: relative;
+}
+.agence {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.avatarDetail {
+    border-radius: 50%;
+    width: 15rem;
+    max-width: 15rem
+}
+.card-header h2 {
+    color: #FFF;
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+}
+.card-content{
+    padding: 20px;
+}
+.card-header:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-image: linear-gradient(to bottom left, #cbb780 10%, #e9dcd3 115%); */
+    z-index: -1;
+    border-radius: 0px 0px 50% 0px;
+}
+.employee p{
+    font-size: 18px;
+    line-height: 1.4;
+    color: #fff;
+    margin: 20px 0px;
+}
+ 
+ 
+ 

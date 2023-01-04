@@ -1,0 +1,27 @@
+ 
+.direction-head{
+    text-align: center;
+    max-height: 9rem;
+    background-color: #000000 !important;
+    border-top:1px solid #cbb780 ;
+    padding: 40px 0px;
+}
+.direction-head h3{
+    color: #cbb780 !important;
+    margin: 0;
+    font-size: 24px;
+}
+.servicename{
+    background-color: #000000 !important;
+    text-align: center;
+    max-height: 9rem;
+    margin-bottom: 20px;
+    padding: 40px 0px;
+     
+
+}
+.servicename h2{
+    color: #cbb780 !important;
+    margin: 0;
+    font-size: 20px;
+}
