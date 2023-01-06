@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(express.static(__dirname + "public"));
-
+app.use("/public/uploads", express.static("./public/uploads"));
 app.get("/", (req, res) => {
   res.json({ message: "Hey, it is workin'" });
 });

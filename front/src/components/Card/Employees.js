@@ -8,7 +8,6 @@ const Employees = ({ sid }) => {
         axios.get("/employees").then((res) => setEmployees(res.data));
     }, []);
     const empdata = employees.filter((emp)=>emp.ServicesActiviteId === sid);
- 
   return (
         <>
         <div className="diremplist">

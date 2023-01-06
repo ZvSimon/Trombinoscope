@@ -6,6 +6,22 @@
     border-top:1px solid #cbb780 ;
     padding: 40px 0px;
 }
+.direction-head a{
+    box-shadow: 0 0 0 2px rgb(230 145 0 / 50%);
+    background-image: none;
+    background-color: transparent;
+    border-color: #e69100;
+    padding: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 14px;
+    color: #fff;
+}
+.direction-head a:hover{
+    background-color:  #ffc107;
+    cursor: pointer;
+}
 .direction-head h3{
     color: #cbb780 !important;
     margin: 0;

@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { Avatar, Collapse, IconButton, Stack, Typography } from "@mui/material";
+import { Avatar,  IconButton, Typography } from "@mui/material";
 import axios from "../../axios";
 import {
-  AccessTimeFilled,
-  Edit,
+   Edit,
   ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
 import EditCard from "../EditCard";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ing from "../../assets/image/gallery-mod.webp";
-import "./card.css";
+ import "./card.css";
 
 const Card = ({ employee, setActif, setupdated }) => {
   const isadmin = localStorage.getItem("logsuccess");
@@ -22,13 +20,18 @@ const Card = ({ employee, setActif, setupdated }) => {
   const [active, setactive] = useState(true);
   const [theid, settheid] = useState(0);
   useEffect(() => {
-    axios
+    if(employee.ServicesActiviteId){
+      axios
       .get("/services/" + employee.ServicesActiviteId)
       .then((res) => setService(res.data));
-    axios
+    }
+    if(employee.AgenceId){
+      axios
       .get("/agences/" + employee.AgenceId)
       .then((res) => setAgence(res.data));
-    axios.get("/actif/" + employee.ActifId).then((res) => setActif(res.data));
+    }
+   
+    // axios.get("/actif/" + employee.ActifId).then((res) => setActif(res.data));
   }, [employee]);
   useEffect(() => {
     if (service != null && service.DirectionId != null) {
@@ -58,8 +61,7 @@ const Card = ({ employee, setActif, setupdated }) => {
       })
       .catch((e) => console.log(e));
   };
-  console.log(employee.id !== theid && active === false);
-
+ 
   return (
     <>
       {employee.id !== theid && active === true && (
@@ -74,7 +76,7 @@ const Card = ({ employee, setActif, setupdated }) => {
                   backgroundColor: "primary.main",
                   color: "primary.contrastText",
                 }}
-                src={ing}
+                src={`http://localhost:8080/${employee.image}`}
               >
                 <Typography variant={"h4"}>
                   {employee.image === null &&
@@ -120,6 +122,7 @@ const Card = ({ employee, setActif, setupdated }) => {
           )}
         </div>
       )}
+ 
     </>
   );
 };

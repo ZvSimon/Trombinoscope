@@ -27,7 +27,10 @@ const Emp = ({ employee }) => {
   return (
     <div className="emp">
       <div className="empimg">
-        <img src={img} alt="" />
+        <img
+          src={`http://localhost:8080/${employee.image && employee.image}`}
+          alt=""
+        />
       </div>
       <h4>{employee.name}</h4>
 

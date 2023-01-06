@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import { NavLink } from "react-router-dom";
-
-import img from "../../assets/image/gallery-mod.webp";
 import "./user.css";
 const User = ({ employee, setActif, setupdated }) => {
   const [service, setService] = useState(employee?.service);
@@ -11,20 +9,29 @@ const User = ({ employee, setActif, setupdated }) => {
   const [agence, setAgence] = useState(employee?.agence);
   const [direction, setDirection] = useState(employee?.direction);
   useEffect(() => {
-    axios
+    if(employee.ServicesActiviteId){
+      axios
       .get("/services/" + employee.ServicesActiviteId)
       .then((res) => setService(res.data));
-    axios
+    }
+    if(employee.AgenceId){
+      axios
       .get("/agences/" + employee.AgenceId)
       .then((res) => setAgence(res.data));
-    axios
+    }
+    if(employee.PilotageId){
+      axios
       .get("/pilotages/" + employee.PilotageId)
       .then((res) => setPilotage(res.data));
-    axios
+    }
+    if(employee.DirectionId){
+      axios
       .get("/directions/" + employee.DirectionId)
       .then((res) => setDirection(res.data));
+    }
+   
+   
   }, []);
-  console.log("The service is : " + service);
   return (
     <NavLink to="/direction" state={{ data: employee.DirectionId }}>
       <div className="user">
@@ -33,7 +40,7 @@ const User = ({ employee, setActif, setupdated }) => {
         <h4>{employee.name}</h4>
         <p>{direction?.name}</p>
         <div className="userimg">
-          <img src={img} alt="" />
+          <img src={`http://localhost:8080/${employee.image && employee.image }`} alt="" />
         </div>
       </div>
     </NavLink>

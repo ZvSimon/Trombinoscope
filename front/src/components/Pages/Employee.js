@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import img from "../../assets/image/gallery-mod.webp";
 import "./employee.css";
@@ -13,27 +13,49 @@ const Employee = () => {
 
   const [agence, setAgence] = useState(employee?.agence);
   const [direction, setDirection] = useState(employee?.direction);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    axios
-      .get("/services/" + employee.ServicesActiviteId)
-      .then((res) => setService(res.data));
-    axios
-      .get("/agences/" + employee.AgenceId)
-      .then((res) => setAgence(res.data));
-    axios
-      .get("/pilotages/" + employee.PilotageId)
-      .then((res) => setPilotage(res.data));
-    axios
-      .get("/directions/" + employee.DirectionId)
-      .then((res) => setDirection(res.data));
-  }, []);
-  console.log("The service is : " + service);
+    if (employee.ServicesActiviteId) {
+      axios
+        .get("/services/" + employee.ServicesActiviteId)
+        .then((res) => setService(res.data));
+    }
+    if (employee.AgenceId) {
+      axios
+        .get("/agences/" + employee.AgenceId)
+        .then((res) => setAgence(res.data));
+    }
+
+    if (employee.PilotageId) {
+      axios
+        .get("/pilotages/" + employee.PilotageId)
+        .then((res) => setPilotage(res.data));
+    }
+    if (employee.DirectionId) {
+      axios
+        .get("/directions/" + employee.DirectionId)
+        .then((res) => setDirection(res.data));
+    }
+  }, [
+    employee.ServicesActiviteId,
+    employee.AgenceId,
+    employee.PilotageId,
+    employee.DirectionId,
+  ]);
   return (
     <div className="empcontainer">
+      <button className="gobackbutton" onClick={() => navigate(-1)}>
+        Go back
+      </button>
       <div className="employee">
         <div className="card-header">
           <div className="agence">
-            <img className="avatarDetail" src={img} alt="" />
+            <img
+              className="avatarDetail"
+              src={`http://localhost:8080/${employee.image && employee.image}`}
+              alt=""
+            />
           </div>
           <div className="name_back_card">
             <h2>{employee.name}</h2>
@@ -42,14 +64,14 @@ const Employee = () => {
         </div>
 
         <div className="card-content">
-          <p>Nom : {employee.name}</p>
+          <p>Name: {employee.name}</p>
           <p>Prenom : {employee.surname}</p>
           <p>Email : {employee.email}</p>
           <p>Mobile : {employee.mobile}</p>
           <p>Direction : {direction && direction?.name}</p>
           <p>Service : {service && service?.name}</p>
           <p>Pilotage : {pilotage && pilotage.name}</p>
-          <p>Agency : {agence && agence.city}</p>
+          <p>Agence : {agence && agence.city}</p>
         </div>
       </div>
     </div>

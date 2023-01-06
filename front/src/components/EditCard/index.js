@@ -5,7 +5,7 @@ import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./editcard.css";
 
-const EditCard = ({ employee, setEditMode, setupdated }) => {
+const EditCard = ({ employee, setEditMode,setupdated }) => {
   const [name, setName] = useState(employee.name);
   const [surname, setSurname] = useState(employee.surname);
   const [email, setEmail] = useState(employee.email);
@@ -15,9 +15,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
   const [inputAgence, setInputAgence] = useState(employee?.agence?.city);
   const [inputService, setInputService] = useState(employee?.service?.name);
   const [inputPilotage, setInputPilotage] = useState(employee?.pilotage?.name);
-  const [inputDirection, setInputDirection] = useState(
-    employee?.direction?.name
-  );
+  const [inputDirection, setInputDirection] = useState(employee?.direction?.name);
 
   const [agence, setAgence] = useState(employee?.agence);
   const [service, setService] = useState(employee?.service);
@@ -37,17 +35,17 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
         email: email,
         mobilefixe: mobilefixe,
         mobile: mobile,
-        AgenceId: agence?.id ?? "",
-        PilotageId: pilotage?.id ?? "",
-        DirectionId: direction?.id ?? "",
-        ServicesActiviteId: service?.id ?? "",
-
+        AgenceId: agence?.id ?? '' ,
+        PilotageId: pilotage?.id ?? '' ,
+        DirectionId: direction?.id ?? '' ,
+        ServicesActiviteId: service?.id ?? '',
+   
         image: image,
         actif: true,
       })
-      .then((res) => {
-        console.log("Updated");
-        setupdated((prev) => prev + 1);
+      .then((res)=>{
+        console.log("Updated")
+        setupdated((prev)=>prev+1)
       })
       .catch((e) => console.log(e));
     setEditMode(false);
@@ -144,26 +142,22 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
 
           <Grid item xs={12}>
             <Autocomplete
-              value={agence}
-              onChange={(e, nv) => setAgence(nv)}
-              inputValue={inputAgence}
+               onChange={(e, nv) => setAgence(nv)}
               onInputChange={(e, nv) => setInputAgence(nv)}
               disablePortal
-              options={agences?.map((a) => {
-                return { label: a.city, ...a };
+              options={agences?.map((agc) => {
+                return { label: agc?.city, ...agc };
               })}
               renderInput={(params) => <TextField {...params} label="Agence" />}
             />
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
-              value={pilotage}
-              onChange={(e, nv) => setPilotage(nv)}
-              inputValue={inputPilotage}
+               onChange={(e, nv) => setPilotage(nv)}
               onInputChange={(e, nv) => setInputPilotage(nv)}
               disablePortal
-              options={pilotages?.map((s) => {
-                return { label: s.name, ...s };
+              options={pilotages?.map((p) => {
+                return { label: p.name, ...p };
               })}
               renderInput={(params) => (
                 <TextField {...params} label="Pilotage" />
@@ -172,13 +166,11 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
-              value={direction}
               onChange={(e, nv) => setDirection(nv)}
-              inputValue={inputDirection}
               onInputChange={(e, nv) => setInputDirection(nv)}
               disablePortal
-              options={directions?.map((s) => {
-                return { label: s.name, ...s };
+              options={directions?.map((d) => {
+                return { label: d.name, ...d };
               })}
               renderInput={(params) => (
                 <TextField {...params} label="Direction" />
@@ -187,9 +179,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
-              value={service}
-              onChange={(e, nv) => setService(nv)}
-              inputValue={inputService}
+               onChange={(e, nv) => setService(nv)}
               onInputChange={(e, nv) => setInputService(nv)}
               disablePortal
               options={services?.map((s) => {

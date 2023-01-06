@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import Cropper from "react-cropper";
 import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
-
+import logo from "../../assets/image/logo.jpg";
 import {
   Box,
   Button,
@@ -57,7 +57,7 @@ const Ajouter = () => {
       PilotageId: pilotage?.id ?? "",
       DirectionId: direction?.id ?? "",
       ServicesActiviteId: service?.id ?? "",
-      image: image,
+      image: image ?? "",
       active: true,
     };
     console.log(data);
@@ -110,11 +110,7 @@ const Ajouter = () => {
             pb: 1,
           }}
         >
-          <img
-            className="logo"
-            src="http://trombino.dmax.global/images/logo.jpg"
-            alt="Logo dmax"
-          />
+          <img className="logo" src={logo} alt="Logo dmax" />
         </Box>
         <Grid>
           <Card sx={{ maxWidth: 450, py: 3, px: 2 }}>
@@ -200,7 +196,6 @@ const Ajouter = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      value={pilotage}
                       onChange={(e, nv) => setPilotage(nv)}
                       inputValue={inputPilotage}
                       onInputChange={(e, nv) => setInputPilotage(nv)}
@@ -215,7 +210,6 @@ const Ajouter = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      value={direction}
                       onChange={(e, nv) => setDirection(nv)}
                       inputValue={inputDirection}
                       onInputChange={(e, nv) => setInputDirection(nv)}
@@ -231,7 +225,6 @@ const Ajouter = () => {
 
                   <Grid item xs={12}>
                     <Autocomplete
-                      value={service}
                       onChange={(e, nv) => setService(nv)}
                       inputValue={inputService}
                       onInputChange={(e, nv) => setInputService(nv)}

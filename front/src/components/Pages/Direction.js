@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Employees from "../Card/Employees";
-import User from "../Card/User";
+import { NavLink } from "react-router-dom";
 import axios from "../../axios";
 import "./direction.css";
+import "../Card/emp.css"
 const Direction = () => {
   const directionbyservice = [
     {
@@ -57,24 +58,38 @@ const Direction = () => {
     axios.get("/employees").then((res) => setEmployees(res.data));
 
     axios.get("/directions/" + did).then((res) => setDirection(res.data));
-  }, []);
+  }, [did]);
 
   const dirandservicelist = directionbyservice.filter((e) => e.id === did);
-  const servicelist = dirandservicelist.map((d) =>
+  const diremp = employees.filter((demp)=>demp.DirectionId);
+  const dirchief = diremp.filter((dchief)=>dchief.ServicesActiviteId === 18 );
+   const servicelist = dirandservicelist.map((d) =>
     d.services.map((aaa) => aaa)
   );
-  const empchief = employees.filter((emp) => emp.ServicesActiviteId === 18);
-
-  //   console.log(seperatefromdir);
-  //   const ssss = seperatefromdir.map((aaa) =>
-  //     aaa.map((e) => console.log(e.name))
-  //   );
-  //   console.log(seperatefromdir);
 
   return (
     <div className="directionpage">
       <div className="direction-head">
         <h3>{direction.name} </h3>
+        <NavLink to="/">
+               Go Back
+        </NavLink>
+      </div>
+      <div className="diremplist">
+         {dirchief.map((ce)=>(
+           <div className="emp">
+           <div className="empimg">
+               <img src={`http://localhost:8080/${ce.image}`} alt="" />
+           </div>
+           <h4>{ce.name}</h4>
+           <p>Chief</p>
+   
+            <NavLink to="/employee" state={{ data: ce }}>
+               Fiche détaillée
+           </NavLink>
+          
+         </div>
+         ))}
       </div>
       {servicelist.map((e) =>
         e.map((data) => (

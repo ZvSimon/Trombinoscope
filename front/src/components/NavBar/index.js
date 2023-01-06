@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
@@ -26,15 +26,12 @@ const navItems = ["Accueil", "Rechercher"];
 const Navbar = (props) => {
   const navigate = useNavigate();
 
-  const [logstatus, setlogstatus] = useState(false);
-
   const loggedin = Boolean(localStorage.getItem("logsuccess"));
 
   const logoutbtn = () => {
     localStorage.clear();
     navigate("/");
   };
-  console.log(logstatus);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -66,15 +63,26 @@ const Navbar = (props) => {
             </ListItem>
           ))}
           {loggedin ? (
-            <ListItem disablePadding>
-              <ListItemButton
-                components="logout"
-                to={`/logout`}
-                sx={{ textAlign: "center", color: "primary.contrastText" }}
-              >
-                <ListItemText primary="logout" />
-              </ListItemButton>
-            </ListItem>
+            <>
+              <ListItem disablePadding>
+                <ListItemButton
+                  components="Ajouter"
+                  to={`/Ajouter`}
+                  sx={{ textAlign: "center", color: "primary.contrastText" }}
+                >
+                  <ListItemText primary="Ajouter" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton
+                  components="logout"
+                  to={`/logout`}
+                  sx={{ textAlign: "center", color: "primary.contrastText" }}
+                >
+                  <ListItemText primary=" Se déconnecter" />
+                </ListItemButton>
+              </ListItem>
+            </>
           ) : (
             <ListItem disablePadding>
               <ListItemButton
@@ -82,7 +90,7 @@ const Navbar = (props) => {
                 to={`/login`}
                 sx={{ textAlign: "center", color: "primary.contrastText" }}
               >
-                <ListItemText primary="login" />
+                <ListItemText primary="Se connecter" />
               </ListItemButton>
             </ListItem>
           )}
@@ -107,11 +115,9 @@ const Navbar = (props) => {
           >
             <Menu />
           </IconButton>
-          <img
-            className="logo"
-            src="http://trombino.dmax.global/images/logo.jpg"
-            alt="Logo dmax"
-          />
+          <NavLink to="/">
+            <img className="logo" src={logo} alt="Logo dmax" />
+          </NavLink>
           <Box
             sx={{
               display: { xs: "none", sm: "flex" },
@@ -136,7 +142,6 @@ const Navbar = (props) => {
                 {item}
               </Button>
             ))}
-
             {loggedin ? (
               <>
                 <Button
@@ -161,7 +166,7 @@ const Navbar = (props) => {
                   onClick={logoutbtn}
                   color={"secondary"}
                 >
-                  {"Se déconnecter"}
+                  {"Se deconnecter"}
                 </Button>
               </>
             ) : (
@@ -179,7 +184,6 @@ const Navbar = (props) => {
               </Button>
             )}
           </Box>
-          <Button color={"primary"}>zizi</Button>
         </Toolbar>
       </AppBar>
       <Box component="nav">
