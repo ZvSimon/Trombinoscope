@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Cropper from "react-cropper";
+
 import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import logo from "../../assets/image/logo.jpg";
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -13,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Modal from "../modal/Modal";
 
 const Ajouter = () => {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ const Ajouter = () => {
   const [inputPilotage, setInputPilotage] = useState("");
   const [inputDirection, setInputDirection] = useState("");
   const [inputService, setInputService] = useState("");
+  const [ModalShow, setModalShow] = useState(false);
 
   const [agence, setAgence] = useState();
   const [service, setService] = useState("");
@@ -42,9 +45,16 @@ const Ajouter = () => {
     axios.get("/pilotages").then((res) => setPilotages(res.data));
     axios.get("/directions").then((res) => setDirections(res.data));
   }, []);
+  const ImageUpModal = (e) => {
+    e.preventDefault();
+    setModalShow(true);
+  };
+
+  console.log(image);
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     console.log("This is our Image : " + image);
     const formData = new FormData();
     const data = {
@@ -239,12 +249,22 @@ const Ajouter = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <input
-                      name="upload-photo"
-                      type="file"
-                      placeholder="Entrez le lien de l'image"
-                      onChange={(e) => setImage(e.target.files[0])}
-                    />
+                    {/* <input
+                    name="upload-photo"
+                    type="file"
+                    placeholder="Entrez le lien de l'image"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  /> */}
+                    {image && (
+                      <Avatar
+                        alt="Remy Sharp"
+                        sx={{ mb: 2 }}
+                        src={URL.createObjectURL(image)}
+                      />
+                    )}
+                    <button className="upload_img" onClick={ImageUpModal}>
+                      Choisir image
+                    </button>
                   </Grid>
 
                   <Grid item xs={12}>
@@ -264,6 +284,9 @@ const Ajouter = () => {
           </Card>
         </Grid>
       </div>
+      {ModalShow ? (
+        <Modal setprofilePicture={setImage} setModalShow={setModalShow} />
+      ) : null}
     </Box>
   );
 };

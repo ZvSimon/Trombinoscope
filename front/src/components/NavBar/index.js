@@ -74,13 +74,18 @@ const Navbar = (props) => {
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton
-                  components="logout"
-                  to={`/logout`}
-                  sx={{ textAlign: "center", color: "primary.contrastText" }}
+                <Button
+                  sx={{
+                    mx: 2,
+                    borderBottom: 2,
+                    "&:hover": { borderBottom: 0 },
+                  }}
+                  component={Link}
+                  onClick={logoutbtn}
+                  color={"secondary"}
                 >
-                  <ListItemText primary=" Se déconnecter" />
-                </ListItemButton>
+                  {"Se déconnecter"}
+                </Button>
               </ListItem>
             </>
           ) : (
@@ -166,7 +171,7 @@ const Navbar = (props) => {
                   onClick={logoutbtn}
                   color={"secondary"}
                 >
-                  {"Se deconnecter"}
+                  {"Se déconnecter"}
                 </Button>
               </>
             ) : (
@@ -184,6 +189,7 @@ const Navbar = (props) => {
               </Button>
             )}
           </Box>
+          <Button color={"primary"}>zizi</Button>
         </Toolbar>
       </AppBar>
       <Box component="nav">

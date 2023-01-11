@@ -75,6 +75,7 @@ const Card = ({ employee, setActif, setupdated }) => {
                   width: "100px",
                   backgroundColor: "primary.main",
                   color: "primary.contrastText",
+                  border: "2px solid #CBB780FF"
                 }}
                 src={`http://localhost:8080/${employee.image}`}
               >

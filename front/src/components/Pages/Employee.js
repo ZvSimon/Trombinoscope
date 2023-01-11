@@ -53,7 +53,7 @@ const Employee = () => {
           <div className="agence">
             <img
               className="avatarDetail"
-              src={`http://localhost:8080/${employee.image && employee.image}`}
+              src={`http://localhost:8080/${employee.image}`}
               alt=""
             />
           </div>

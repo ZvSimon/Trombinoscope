@@ -61,7 +61,7 @@ const Direction = () => {
   }, [did]);
 
   const dirandservicelist = directionbyservice.filter((e) => e.id === did);
-  const diremp = employees.filter((demp)=>demp.DirectionId);
+  const diremp = employees.filter((demp)=>demp.DirectionId === did);
   const dirchief = diremp.filter((dchief)=>dchief.ServicesActiviteId === 18 );
    const servicelist = dirandservicelist.map((d) =>
     d.services.map((aaa) => aaa)

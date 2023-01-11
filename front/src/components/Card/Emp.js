@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import { NavLink } from "react-router-dom";
 
-import img from "../../assets/image/gallery-mod.webp";
 import "./emp.css";
 const Emp = ({ employee }) => {
   const [service, setService] = useState(employee?.service);
@@ -17,28 +16,25 @@ const Emp = ({ employee }) => {
       .get("/agences/" + employee.AgenceId)
       .then((res) => setAgence(res.data));
     axios
-      .get("/pilotages/" + employee.PilotageId)
-      .then((res) => setPilotage(res.data));
+    .get("/pilotages/" + employee.PilotageId)
+    .then((res) => setPilotage(res.data));
     axios
       .get("/directions/" + employee.DirectionId)
       .then((res) => setDirection(res.data));
   }, []);
-  console.log(agence);
   return (
-    <div className="emp">
-      <div className="empimg">
-        <img
-          src={`http://localhost:8080/${employee.image && employee.image}`}
-          alt=""
-        />
-      </div>
-      <h4>{employee.name}</h4>
+      <div className="emp">
+        <div className="empimg">
+            <img src={`http://localhost:8080/${employee.image}`} alt="" />
+        </div>
+        <h4>{employee.name}</h4>
 
-      <p>{agence?.city}</p>
-      <NavLink to="/employee" state={{ data: employee }}>
-        Fiche détaillée
-      </NavLink>
-    </div>
+        <p>{agence?.city}</p>
+        <NavLink to="/employee" state={{ data: employee }}>
+            Fiche détaillée
+        </NavLink>
+       
+      </div>
   );
 };
 

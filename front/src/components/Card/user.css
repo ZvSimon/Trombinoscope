@@ -48,6 +48,7 @@
     width: 90px;
     height: 83px;
     border-radius: 50%;
+    border: 2px solid #CBB780FF;
 }
 @media screen and (max-width: 1400px) {
     .usercontainer {
@@ -58,3 +59,9 @@
         width: 155px;
     }
   }
+  @media screen and (max-width: 576px) {
+    
+    .user{
+        width:300px;
+    }
+  } 

@@ -15,6 +15,22 @@ a {
     width: 100%;
 }
 
+.reactEasyCrop_Container{
+    margin-top: 30px !important;
+}
+
+.upload_img{
+    padding: 8px 20px;
+    background: #CBB780FF;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width:1300px) {
     .our_cart{
