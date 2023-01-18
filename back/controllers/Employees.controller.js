@@ -2,6 +2,7 @@ const { employees_tags } = require("../models");
 const db = require("../models");
 const Employees = db.employees;
 const Employees_Tags = db.employees_tags;
+const Tags = db.tags;
 const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
   const {
@@ -63,11 +64,16 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
   const id = req.query.id;
   const condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
-
-  Employees.findAll({ where: condition })
+  Employees.findAll(
+    {
+      where: condition,
+      include: [{
+        model: Tags,
+      }],
+    })
     .then((data) => {
       res.send(data);
     })
@@ -111,6 +117,7 @@ exports.update = (req, res) => {
     ServicesActiviteId,
     PilotageId,
     DirectionId,
+    Tags,
   } = req.body;
   Employees.findOne({ where: { id: req.params.id } })
     .then((data) => {
@@ -135,8 +142,20 @@ exports.update = (req, res) => {
         employeesData["DirectionId"] = DirectionId;
       }
 
+      const TagsPayload = Tags?.map(t => ({ TagId: t, EmployeeId: req.params.id })) || [];
       Employees.update(employeesData, { where: { id: req.params.id } })
-        .then((updateData) => {
+        .then(async (updateData) => {
+          await Employees_Tags.destroy(
+            {
+              where: { EmployeeId: req.params.id }
+            }
+          );
+          await Employees_Tags.bulkCreate(
+            TagsPayload,
+            {
+              updateOnDuplicate: ["TagId"],
+            }
+          );
           res.status(200).json({
             success: true,
             msg: "Employee info updated successfully",

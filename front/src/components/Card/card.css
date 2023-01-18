@@ -38,10 +38,10 @@
 .show_data {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   justify-content: center;
   gap: 10px;
-  position: absolute;
+  /* position: absolute; */
   bottom: -190px;
   width: 100%;
   padding: 20px;

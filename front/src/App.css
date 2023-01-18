@@ -28,6 +28,12 @@ a {
     width: 100%;
 }
 
+
+.css-5ibs0b-MuiBadge-badge {
+    min-width: 92px !important;
+    padding: 0 0px !important;
+    height: 30px !important;
+}
 .reactEasyCrop_Container{
     margin-top: 30px !important;
 }

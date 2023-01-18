@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Avatar, IconButton, Typography } from "@mui/material";
+import { Avatar, IconButton, Typography, Box, Badge } from "@mui/material";
 import axios from "../../axios";
 import { Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
 import EditCard from "../EditCard";
@@ -115,6 +115,13 @@ const Card = ({ employee, setActif, setupdated }) => {
               <Typography>Mobile: {employee.mobile}</Typography>
               <Typography>Agence: {agence?.city}</Typography>
               <Typography>Service: {service?.name}</Typography>
+              <Typography>Tags: </Typography>
+
+              {employee?.Tags.map((t) => (
+                <div className="Tags_items">
+                  <Badge color="secondary" badgeContent={t.name}></Badge>
+                </div>
+              ))}
             </div>
           )}
         </div>
