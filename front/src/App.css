@@ -6,8 +6,21 @@
 a {
     color: inherit;
     text-decoration:none; }
+.css-mf1cb5-MuiButtonBase-root-MuiIconButton-root{
+    color:#CBB780FF;
+}
+.back{
+    color:#CBB780FF;
+    background-color: black !important;
+    border:solid;
+    border-color: white;
+    border-radius: 20px;
 
-
+}
+.css-1vooibu-MuiSvgIcon-root{
+    color:#CBB780FF;
+    
+}
 .our_cart{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -18,7 +31,12 @@ a {
 .reactEasyCrop_Container{
     margin-top: 30px !important;
 }
-
+.MuiBox-root css-14ofx3b{
+    background-color:#CBB780FF;
+}
+.MuiBox-root css-tx26vy{
+    background-color:#CBB780FF;
+}
 .upload_img{
     padding: 8px 20px;
     background: #CBB780FF;
@@ -30,7 +48,9 @@ a {
     border-radius: 6px;
     cursor: pointer;
 }
-
+.userimg{
+    position: static;
+}
 
 @media screen and (max-width:1300px) {
     .our_cart{

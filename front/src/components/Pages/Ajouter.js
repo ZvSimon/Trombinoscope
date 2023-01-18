@@ -24,6 +24,7 @@ const Ajouter = () => {
   const [mobilefixe, setMobilefixe] = useState("");
   const [mobile, setMobile] = useState("");
   const [image, setImage] = useState("");
+  const [inputTags, setInputTags] = useState([]);
   const [inputAgence, setInputAgence] = useState("");
   const [inputPilotage, setInputPilotage] = useState("");
   const [inputDirection, setInputDirection] = useState("");
@@ -33,6 +34,7 @@ const Ajouter = () => {
   const [agence, setAgence] = useState();
   const [service, setService] = useState("");
   const [pilotage, setPilotage] = useState();
+  const [tags, setTags] = useState([]);
   const [direction, setDirection] = useState("");
   const [agences, setAgences] = useState([]);
   const [services, setServices] = useState([]);
@@ -40,7 +42,7 @@ const Ajouter = () => {
   const [directions, setDirections] = useState([]);
   useEffect(() => {
     axios.get("/agences").then((res) => setAgences(res.data));
-
+    axios.get("/tags").then((res) => setTags(res.data));
     axios.get("/services").then((res) => setServices(res.data));
     axios.get("/pilotages").then((res) => setPilotages(res.data));
     axios.get("/directions").then((res) => setDirections(res.data));
@@ -49,8 +51,6 @@ const Ajouter = () => {
     e.preventDefault();
     setModalShow(true);
   };
-
-  console.log(image);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -63,6 +63,7 @@ const Ajouter = () => {
       email: email,
       mobilefixe: mobilefixe,
       mobile: mobile,
+      Tags: inputTags.map((inputTag) => JSON.stringify(inputTag)).join("|"),
       AgenceId: agence?.id ?? "",
       PilotageId: pilotage?.id ?? "",
       DirectionId: direction?.id ?? "",
@@ -244,6 +245,20 @@ const Ajouter = () => {
                       })}
                       renderInput={(params) => (
                         <TextField {...params} label="Service" />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Autocomplete
+                      multiple
+                      // id="size-small-filled-multi"
+                      value={inputTags}
+                      onChange={(e, nv) => setInputTags(nv.map((_) => _))}
+                      getOptionLabel={(option) => option.name}
+                      disablePortal
+                      options={tags}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Tag" />
                       )}
                     />
                   </Grid>

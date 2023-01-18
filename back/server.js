@@ -32,7 +32,7 @@ require("./routes/Agences.routes")(app);
 require("./routes/Services.routes.Js")(app);
 require("./routes/Directions.routes")(app);
 require("./routes/Pilotages.routes")(app);
-
+require("./routes/Tags.routes")(app);
 const PORT = process.env.REACT_APP_SERVER_PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

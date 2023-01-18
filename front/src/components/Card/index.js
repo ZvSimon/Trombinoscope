@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import { Avatar,  IconButton, Typography } from "@mui/material";
+import { Avatar, IconButton, Typography } from "@mui/material";
 import axios from "../../axios";
-import {
-   Edit,
-  ExpandLess,
-  ExpandMore,
-} from "@mui/icons-material";
+import { Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
 import EditCard from "../EditCard";
 import DeleteIcon from "@mui/icons-material/Delete";
- import "./card.css";
+import "./card.css";
 
 const Card = ({ employee, setActif, setupdated }) => {
   const isadmin = localStorage.getItem("logsuccess");
@@ -20,17 +16,17 @@ const Card = ({ employee, setActif, setupdated }) => {
   const [active, setactive] = useState(true);
   const [theid, settheid] = useState(0);
   useEffect(() => {
-    if(employee.ServicesActiviteId){
+    if (employee.ServicesActiviteId) {
       axios
-      .get("/services/" + employee.ServicesActiviteId)
-      .then((res) => setService(res.data));
+        .get("/services/" + employee.ServicesActiviteId)
+        .then((res) => setService(res.data));
     }
-    if(employee.AgenceId){
+    if (employee.AgenceId) {
       axios
-      .get("/agences/" + employee.AgenceId)
-      .then((res) => setAgence(res.data));
+        .get("/agences/" + employee.AgenceId)
+        .then((res) => setAgence(res.data));
     }
-   
+
     // axios.get("/actif/" + employee.ActifId).then((res) => setActif(res.data));
   }, [employee]);
   useEffect(() => {
@@ -61,7 +57,7 @@ const Card = ({ employee, setActif, setupdated }) => {
       })
       .catch((e) => console.log(e));
   };
- 
+
   return (
     <>
       {employee.id !== theid && active === true && (
@@ -75,7 +71,7 @@ const Card = ({ employee, setActif, setupdated }) => {
                   width: "100px",
                   backgroundColor: "primary.main",
                   color: "primary.contrastText",
-                  border: "2px solid #CBB780FF"
+                  border: "2px solid #CBB780FF",
                 }}
                 src={`http://localhost:8080/${employee.image}`}
               >
@@ -123,7 +119,6 @@ const Card = ({ employee, setActif, setupdated }) => {
           )}
         </div>
       )}
- 
     </>
   );
 };

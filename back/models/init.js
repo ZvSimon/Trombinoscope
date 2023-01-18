@@ -64,4 +64,11 @@ module.exports = (db) => {
       { id: 18, name: "Chef" },
     ])
     .then(() => console.log("Services data have been saved"));
+  db.tags
+    .bulkCreate([
+      { id: 1, name: "Téléphonie" },
+      { id: 2, name: "Route" },
+      { id: 3, name: "Grand Compte" },
+    ])
+    .then(() => console.log("Tag data have been saved"));
 };

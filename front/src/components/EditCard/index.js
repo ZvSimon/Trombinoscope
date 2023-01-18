@@ -5,18 +5,21 @@ import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./editcard.css";
 
-const EditCard = ({ employee, setEditMode,setupdated }) => {
+const EditCard = ({ employee, setEditMode, setupdated }) => {
   const [name, setName] = useState(employee.name);
   const [surname, setSurname] = useState(employee.surname);
   const [email, setEmail] = useState(employee.email);
   const [mobilefixe, setMobilefixe] = useState(employee.mobilefixe);
   const [mobile, setMobile] = useState(employee.mobile);
   const [image, setImage] = useState(employee.image);
+  const [inputTags, setInputTags] = useState(employee?.tag?.name);
   const [inputAgence, setInputAgence] = useState(employee?.agence?.city);
   const [inputService, setInputService] = useState(employee?.service?.name);
   const [inputPilotage, setInputPilotage] = useState(employee?.pilotage?.name);
-  const [inputDirection, setInputDirection] = useState(employee?.direction?.name);
-
+  const [inputDirection, setInputDirection] = useState(
+    employee?.direction?.name
+  );
+  const [tags, setTags] = useState(employee?.tag);
   const [agence, setAgence] = useState(employee?.agence);
   const [service, setService] = useState(employee?.service);
   const [pilotage, setPilotage] = useState(employee?.pilotage);
@@ -25,7 +28,7 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
   const [services, setServices] = useState([]);
   const [pilotages, setPilotages] = useState([]);
   const [directions, setDirections] = useState([]);
-
+  console.log(tags);
   const onSubmit = (e) => {
     e.preventDefault();
     axios
@@ -35,17 +38,18 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
         email: email,
         mobilefixe: mobilefixe,
         mobile: mobile,
-        AgenceId: agence?.id ?? '' ,
-        PilotageId: pilotage?.id ?? '' ,
-        DirectionId: direction?.id ?? '' ,
-        ServicesActiviteId: service?.id ?? '',
-   
+        AgenceId: agence?.id ?? "",
+        PilotageId: pilotage?.id ?? "",
+        DirectionId: direction?.id ?? "",
+        ServicesActiviteId: service?.id ?? "",
+        Tags: inputTags.map((inputTag) => JSON.stringify(inputTag)).join("|"),
+
         image: image,
         actif: true,
       })
-      .then((res)=>{
-        console.log("Updated")
-        setupdated((prev)=>prev+1)
+      .then((res) => {
+        console.log("Updated");
+        setupdated((prev) => prev + 1);
       })
       .catch((e) => console.log(e));
     setEditMode(false);
@@ -53,6 +57,7 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
 
   useEffect(() => {
     axios.get("/agences").then((res) => setAgences(res.data));
+    axios.get("/tags").then((res) => setTags(res.data));
 
     axios.get("/services").then((res) => setServices(res.data));
     axios.get("/pilotages").then((res) => setPilotages(res.data));
@@ -69,11 +74,15 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
     axios
       .get("/pilotages/" + employee.PilotageId)
       .then((res) => setPilotage(res.data));
+    axios.get("/tags/" + employee.TagId).then((res) => setTags(res.data));
     axios
       .get("/directions/" + employee.DirectionId)
       .then((res) => setService(res.data));
   }, [employee]);
-
+  console.log(agence);
+  console.log({ pilotage });
+  console.log({ direction });
+  console.log({ employee });
   return (
     <div className="popup">
       <div className="popup_box">
@@ -142,23 +151,25 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
 
           <Grid item xs={12}>
             <Autocomplete
-               onChange={(e, nv) => setAgence(nv)}
+              onChange={(e, nv) => setAgence(nv)}
               onInputChange={(e, nv) => setInputAgence(nv)}
               disablePortal
               options={agences?.map((agc) => {
                 return { label: agc?.city, ...agc };
               })}
+              value={{ label: agence?.city, ...agence }}
               renderInput={(params) => <TextField {...params} label="Agence" />}
             />
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
-               onChange={(e, nv) => setPilotage(nv)}
+              onChange={(e, nv) => setPilotage(nv)}
               onInputChange={(e, nv) => setInputPilotage(nv)}
               disablePortal
               options={pilotages?.map((p) => {
                 return { label: p.name, ...p };
               })}
+              value={{ label: pilotage?.name }}
               renderInput={(params) => (
                 <TextField {...params} label="Pilotage" />
               )}
@@ -172,6 +183,7 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
               options={directions?.map((d) => {
                 return { label: d.name, ...d };
               })}
+              value={{ label: direction?.name, ...direction }}
               renderInput={(params) => (
                 <TextField {...params} label="Direction" />
               )}
@@ -179,17 +191,30 @@ const EditCard = ({ employee, setEditMode,setupdated }) => {
           </Grid>
           <Grid item xs={12}>
             <Autocomplete
-               onChange={(e, nv) => setService(nv)}
+              onChange={(e, nv) => setService(nv)}
               onInputChange={(e, nv) => setInputService(nv)}
               disablePortal
               options={services?.map((s) => {
                 return { label: s.name, ...s };
               })}
+              value={{ label: service?.name, ...service }}
               renderInput={(params) => (
                 <TextField {...params} label="Service" />
               )}
             />
           </Grid>
+          {/* <Grid item xs={12}>
+            <Autocomplete
+              multiple
+              // id="size-small-filled-multi"
+              // value={inputTags}
+              onChange={(e, nv) => setInputTags(nv.map((_) => _))}
+              getOptionLabel={(option) => option.name}
+              disablePortal
+              //options={tags}
+              renderInput={(params) => <TextField {...params} label="Tag" />}
+            />
+          </Grid> */}
 
           {/* <Grid item xs={12}>
                 <input

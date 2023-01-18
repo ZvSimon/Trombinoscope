@@ -7,16 +7,18 @@
     margin: 10px 0px;
 }
 
-.ceo{}
+
 .user {
+    border: solid;
+    border-color:white;
     text-align: center;
     text-decoration: none;
-    color: rgb(56, 56, 56);
+    color: #CBB780FF;
     display: inline-block;
     padding: 25px 10px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    background-color: #ffffff;
+    background-color:black;
     width: 190px;
     border-radius: 6px;
     height: 17rem;

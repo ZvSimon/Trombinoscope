@@ -3,19 +3,21 @@
     justify-content: center;
     width: 100%;
     gap: 10px;
-    margin: 10px 0px;
+    margin: 0px 0px;
+    background-color: #cbb780;
 }
  
 .emp {
     height: 15.3rem;
     text-align: center;
     text-decoration: none;
-    color: rgb(56, 56, 56);
+    color: #cbb780;
     display: inline-block;
     padding: 25px 10px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    background-color: #cbb780;
+    background-color: black;
+    margin-top: 2rem;
 
      border-radius: 6px;
     max-height: 18rem;
@@ -27,6 +29,8 @@
     border: 1px solid rgba(20, 20, 20, 0.125);
     min-height: 23rem !important;
     padding: 1.25rem;
+    border:solid;
+    border-color:white;
 }
 .emp p{
     font-weight: 500;
