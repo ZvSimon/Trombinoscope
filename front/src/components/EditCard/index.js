@@ -233,7 +233,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                   inputValue={inputTags}
                   onInputChange={(e, nv) => setInputTags(nv)}
                   onChange={(e, nv) => setEmpTags(nv.map((_) => _))}
-                  getOptionLabel={(option) => option.name}
+                  getOptionLabel={(option) => option.name || ""}
                   disablePortal
                   options={tags}
                   renderInput={(params) => (

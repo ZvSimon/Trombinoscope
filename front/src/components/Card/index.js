@@ -110,6 +110,7 @@ const Card = ({ employee, setActif, setupdated }) => {
           </div>
           {!collapse && (
             <div className="show_data">
+              
               <Typography>{employee.email}</Typography>
               <Typography>Fixe: {employee.mobilefixe}</Typography>
               <Typography>Mobile: {employee.mobile}</Typography>
@@ -122,6 +123,7 @@ const Card = ({ employee, setActif, setupdated }) => {
                   <Badge color="secondary" badgeContent={t.name}></Badge>
                 </div>
               ))}
+              
             </div>
           )}
         </div>

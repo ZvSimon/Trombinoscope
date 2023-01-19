@@ -40,7 +40,7 @@ const User = ({ employee, setActif, setupdated }) => {
     <NavLink to="/direction" state={{ data: employee.DirectionId }}>
       <div className="user">
         <p>{service?.name}</p>
-        <p>{tag?.name}</p>
+        
         <p>{pilotage?.name}</p>
         <h4>{employee.name}</h4>
         <p>{direction?.name}</p>

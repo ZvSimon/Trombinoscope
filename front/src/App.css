@@ -27,8 +27,15 @@ a {
     gap: 30px;
     width: 100%;
 }
+.Tags_itemss{
+text-align:center;
+margin-bottom: 20px;
+display: inline;
+margin-left: 20%;
 
-
+position: relative;
+top: -45px;
+}
 .css-5ibs0b-MuiBadge-badge {
     min-width: 92px !important;
     padding: 0 0px !important;

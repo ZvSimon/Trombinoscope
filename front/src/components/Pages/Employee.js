@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Avatar, IconButton, Typography, Box, Badge } from "@mui/material";
 
 import img from "../../assets/image/gallery-mod.webp";
 import "./employee.css";
+import { TagFaces } from "@mui/icons-material";
 const Employee = () => {
   const location = useLocation();
+
+  const [tags, setTags] = useState([]);
   // const [emp, setEmp] = useState([]);
   const employee = location.state?.data;
   const [service, setService] = useState(employee?.service);
   const [pilotage, setPilotage] = useState(employee?.pilotage);
+  const [tag, setTag] = useState(employee?.tag);
+  const [empTags, setEmpTags] = useState(employee?.Tags);
 
   const [agence, setAgence] = useState(employee?.agence);
   const [direction, setDirection] = useState(employee?.direction);
@@ -37,44 +43,61 @@ const Employee = () => {
         .get("/directions/" + employee.DirectionId)
         .then((res) => setDirection(res.data));
     }
+    if (employee.TagId) {
+      axios.get("/tag/" + employee.Tags).then((res) => setTag(res.data));
+    }
+    if (employee.Tags) {
+      setEmpTags(employee.Tags);
+    }
   }, [
     employee.ServicesActiviteId,
     employee.AgenceId,
     employee.PilotageId,
     employee.DirectionId,
+    employee.Tags,
   ]);
   return (
-    <div className="empcontainer">
-      <button className="gobackbutton" onClick={() => navigate(-1)}>
-        Go back
-      </button>
-      <div className="employee">
-        <div className="card-header">
-          <div className="agence">
-            <img
-              className="avatarDetail"
-              src={`http://localhost:8080/${employee.image}`}
-              alt=""
-            />
+    console.log({ tags }),
+    console.log({ empTags }),
+    console.log({ tags }),
+    (
+      <div className="empcontainer">
+        <button className="gobackbutton" onClick={() => navigate(-1)}>
+          Retour
+        </button>
+        <div className="employee">
+          <div className="card-header">
+            <div className="agence">
+              <img
+                className="avatarDetail"
+                src={`http://localhost:8080/${employee.image}`}
+                alt=""
+              />
+            </div>
+            <div className="name_back_card">
+              <h2>{employee.name}</h2>
+              <h2>{employee.surname}</h2>
+            </div>
           </div>
-          <div className="name_back_card">
-            <h2>{employee.name}</h2>
-            <h2>{employee.surname}</h2>
-          </div>
-        </div>
 
-        <div className="card-content">
-          <p>Name: {employee.name}</p>
-          <p>Prenom : {employee.surname}</p>
-          <p>Email : {employee.email}</p>
-          <p>Mobile : {employee.mobile}</p>
-          <p>Direction : {direction && direction?.name}</p>
-          <p>Service : {service && service?.name}</p>
-          <p>Pilotage : {pilotage && pilotage.name}</p>
-          <p>Agence : {agence && agence.city}</p>
+          <div className="card-content">
+            <p>{employee.email}</p>
+            <p>Fixe: {employee.mobilefixe}</p>
+            <p>Mobile: {employee.mobile}</p>
+            <p>Agence: {agence?.city}</p>
+            <p>Service: {service?.name}</p>
+
+            <p>Tags: </p>
+
+            {employee?.Tags.map((t) => (
+              <div key={t.name} className="Tags_itemss">
+                <Badge color="secondary" badgeContent={t.name}></Badge>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 

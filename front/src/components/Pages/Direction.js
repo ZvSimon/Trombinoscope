@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import axios from "../../axios";
 import "./direction.css";
 import "../Card/emp.css"
-const Direction = () => {
+const Direction = (employee) => {
   const directionbyservice = [
     {
       id: 1,
@@ -50,12 +50,16 @@ const Direction = () => {
   ];
   const [direction, setDirection] = useState([]);
   const location = useLocation();
+  const [agence, setAgence] = useState(employee?.agence);
   // const [emp, setEmp] = useState([]);
   const did = location.state?.data;
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     axios.get("/employees").then((res) => setEmployees(res.data));
+    axios
+      .get("/agences/" + did)
+      .then((res) => setAgence(res.data));
 
     axios.get("/directions/" + did).then((res) => setDirection(res.data));
   }, [did]);
@@ -70,9 +74,9 @@ const Direction = () => {
   return (
     <div className="directionpage">
       <div className="direction-head">
-        <h3>{direction.name} </h3>
+        <h3 key={direction.name}>{direction.name} </h3>
         <NavLink to="/">
-               Go Back
+               Retour
         </NavLink>
       </div>
       <div className="diremplist">
@@ -82,7 +86,7 @@ const Direction = () => {
                <img src={`http://localhost:8080/${ce.image}`} alt="" />
            </div>
            <h4>{ce.name}</h4>
-           <p>Chief</p>
+           <p>{agence?.city}</p>
    
             <NavLink to="/employee" state={{ data: ce }}>
                Fiche détaillée
