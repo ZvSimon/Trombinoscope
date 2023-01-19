@@ -9,6 +9,9 @@ a {
 .css-mf1cb5-MuiButtonBase-root-MuiIconButton-root{
     color:#CBB780FF;
 }
+.css-vj1n65-MuiGrid-root {
+    margin-top: 20px;
+}
 .show_data{
     border:solid;
     border-radius:10px;

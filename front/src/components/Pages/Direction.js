@@ -65,9 +65,9 @@ const Direction = (employee) => {
   }, [did]);
 
   const dirandservicelist = directionbyservice.filter((e) => e.id === did);
-  const diremp = employees.filter((demp)=>demp.DirectionId === did);
-  const dirchief = diremp.filter((dchief)=>dchief.ServicesActiviteId === 18 );
-   const servicelist = dirandservicelist.map((d) =>
+  const diremp = employees.filter((demp) => demp.DirectionId === did);
+  const dirchief = diremp.filter((dchief) => dchief.ServicesActiviteId === 18);
+  const servicelist = dirandservicelist.map((d) =>
     d.services.map((aaa) => aaa)
   );
 
@@ -76,35 +76,35 @@ const Direction = (employee) => {
       <div className="direction-head">
         <h3 key={direction.name}>{direction.name} </h3>
         <NavLink to="/">
-               Retour
+          Retour
         </NavLink>
       </div>
       <div className="diremplist">
-         {dirchief.map((ce)=>(
-           <div className="emp">
-           <div className="empimg">
-               <img src={`http://localhost:8080/${ce.image}`} alt="" />
-           </div>
-           <h4>{ce.name}</h4>
-           <p>{agence?.city}</p>
-   
+        {dirchief.map((ce, index) => (
+          <div className="emp" key={index}>
+            <div className="empimg">
+              <img src={`http://localhost:8080/${ce.image}`} alt="" />
+            </div>
+            <h4>{ce.name}</h4>
+            <p>{agence?.city}</p>
+
             <NavLink to="/Details" state={{ data: ce }}>
-               Fiche détaillée
-           </NavLink>
-          
-         </div>
-         ))}
+              Fiche détaillée
+            </NavLink>
+
+          </div>
+        ))}
       </div>
       {servicelist.map((e) =>
-        e.map((data) => (
-          
-          <>
+        e.map((data,index) => (
+
+          <div key={index}>
             <div className="servicename">
               <h2>{data.name}</h2>
             </div>
-            
+
             <Employees sid={data.id} />
-          </>
+          </div>
         ))
       )}
     </div>

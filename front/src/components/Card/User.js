@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import { NavLink } from "react-router-dom";
 import "./user.css";
+import { Avatar, Typography } from "@mui/material";
 const User = ({ employee, setActif, setupdated }) => {
   const [service, setService] = useState(employee?.service);
   const [pilotage, setPilotage] = useState(employee?.pilotage);
@@ -40,15 +41,27 @@ const User = ({ employee, setActif, setupdated }) => {
     <NavLink to="/Direction" state={{ data: employee.DirectionId }}>
       <div className="user">
         <p>{service?.name}</p>
-        
+
         <p>{pilotage?.name}</p>
         <h4>{employee.name}</h4>
         <p>{direction?.name}</p>
-        <div className="userimg">
-          <img
-            src={`http://localhost:8080/${employee.image && employee.image}`}
-            alt=""
-          />
+        <div className="cart_img">
+          <Avatar
+            color={"primary"}
+            sx={{
+              height: "100px",
+              width: "100px",
+              backgroundColor: "primary.main",
+              color: "primary.contrastText",
+              border: "2px solid #CBB780FF",
+            }}
+            src={`http://localhost:8080/${employee.image}`}
+          >
+            <Typography variant={"h4"}>
+              {employee.image === null &&
+                employee.name[0] + employee.surname[0]}
+            </Typography>
+          </Avatar>
         </div>
       </div>
     </NavLink>

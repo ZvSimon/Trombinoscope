@@ -5,6 +5,7 @@ import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./editcard.css";
 
+
 const EditCard = ({ employee, setEditMode, setupdated }) => {
   const [name, setName] = useState(employee.name);
   const [surname, setSurname] = useState(employee.surname);
@@ -23,7 +24,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
   const [service, setService] = useState(employee?.service);
   const [pilotage, setPilotage] = useState(employee?.pilotage);
   const [direction, setDirection] = useState(employee?.direction);
-  const [empTags, setEmpTags] = useState(employee?.Tags);
+  const [empTags, setEmpTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [agences, setAgences] = useState([]);
   const [services, setServices] = useState([]);
@@ -68,18 +69,26 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("/services/" + employee.ServicesActiviteId)
-      .then((res) => setService(res.data));
-    axios
-      .get("/agences/" + employee.AgenceId)
-      .then((res) => setAgence(res.data));
-    axios
-      .get("/pilotages/" + employee.PilotageId)
-      .then((res) => setPilotage(res.data));
-    axios
-      .get("/directions/" + employee.DirectionId)
-      .then((res) => setDirection(res.data));
+    employee.ServicesActiviteId &&
+      axios
+        .get("/services/" + employee.ServicesActiviteId)
+        .then((res) => setService(res.data));
+
+    employee.AgenceId &&
+      axios
+        .get("/agences/" + employee.AgenceId)
+        .then((res) => setAgence(res.data));
+
+    employee.PilotageId &&
+      axios
+        .get("/pilotages/" + employee.PilotageId)
+        .then((res) => setPilotage(res.data));
+
+    employee.DirectionId &&
+      axios
+        .get("/directions/" + employee.DirectionId)
+        .then((res) => setDirection(res.data));
+
     if (employee.Tags) {
       setEmpTags(employee.Tags);
     }
@@ -94,6 +103,14 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
   console.log({ pilotage });
   console.log({ direction });
   console.log({ employee });
+
+  function getSelectedTagOptions() {
+    return tags.filter(function (o1) {
+      return empTags.some(function (o2) {
+        return o1.id == o2.id;          // id is unnique both array object
+      });
+    });
+  }
   return (
     <div className="popup">
       <div className="popup_box">
@@ -174,7 +191,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                   options={agences?.map((agc) => {
                     return { label: agc?.city, ...agc };
                   })}
-                  defaultValue={{ label: agence?.city, ...agence }}
+                  defaultValue={agence ? { label: agence?.city, ...agence } :  undefined}
                   renderInput={(params) => (
                     <TextField {...params} label="Agence" />
                   )}
@@ -189,7 +206,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                   options={pilotages?.map((p) => {
                     return { label: p.name, ...p };
                   })}
-                  defaultValue={{ label: pilotage?.name, ...pilotage }}
+                  defaultValue={ pilotage ? { label: pilotage?.name, ...pilotage } : undefined}
                   renderInput={(params) => (
                     <TextField {...params} label="Pilotage" />
                   )}
@@ -204,7 +221,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                   options={directions?.map((d) => {
                     return { label: d.name, ...d };
                   })}
-                  defaultValue={{ label: direction?.name, ...direction }}
+                  defaultValue={direction ?{ label: direction?.name, ...direction } : undefined}
                   renderInput={(params) => (
                     <TextField {...params} label="Direction" />
                   )}
@@ -219,7 +236,7 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                   options={services?.map((s) => {
                     return { label: s.name, ...s };
                   })}
-                  defaultValue={{ label: service?.name, ...service }}
+                  defaultValue={service ? { label: service?.name, ...service } : undefined}
                   renderInput={(params) => (
                     <TextField {...params} label="Service" />
                   )}
@@ -229,11 +246,9 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                 <Autocomplete
                   multiple
                   id="size-small-filled-multi"
-                  defaultValue={empTags}
-                  inputValue={inputTags}
-                  onInputChange={(e, nv) => setInputTags(nv)}
-                  onChange={(e, nv) => setEmpTags(nv.map((_) => _))}
-                  getOptionLabel={(option) => option.name || ""}
+                  defaultValue={getSelectedTagOptions}
+                  onChange={(e, data) => setEmpTags(data)}
+                  getOptionLabel={(option) => option.name}
                   disablePortal
                   options={tags}
                   renderInput={(params) => (
@@ -242,14 +257,14 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
                 />
               </Grid>
               {/* <Grid item xs={12}>
-                  <input
-                    name="upload-photo"
-                    type="file"
-                    placeholder="Entrez le lien de l'image"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                  />
-                </Grid> */}
+                <input
+                  name="upload-photo"
+                  type="file"
+                  placeholder="Entrez le lien de l'image"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+              </Grid> */}
               <Grid item xs={6}>
                 <Button
                   onClick={onSubmit}

@@ -18,7 +18,7 @@ const Log_in = () => {
   const [password, setpassword] = useState("");
   const heandelButton = (e) => {
     e.preventDefault();
-    if (email === "admin@email.com" && password === "123456") {
+    if (email ===  process.env.REACT_APP_EMAIL && password === process.env.REACT_APP_PASSWORD) {
       localStorage.setItem("logsuccess", true);
       navigate("/");
  

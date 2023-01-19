@@ -119,7 +119,7 @@ const Card = ({ employee, setActif, setupdated }) => {
               <Typography>Tags: </Typography>
 
               {employee?.Tags.map((t) => (
-                <div className="Tags_items">
+                <div className="Tags_items" key={t.id}>
                   <Badge color="secondary" badgeContent={t.name}></Badge>
                 </div>
               ))}

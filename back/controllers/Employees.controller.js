@@ -129,18 +129,11 @@ exports.update = (req, res) => {
         mobile: mobile ?? data.mobile,
         active: active ?? data.active,
       };
-      if (AgenceId != "") {
-        employeesData["AgenceId"] = AgenceId;
-      }
-      if (ServicesActiviteId != "") {
-        employeesData["ServicesActiviteId"] = ServicesActiviteId;
-      }
-      if (PilotageId != "") {
-        employeesData["PilotageId"] = PilotageId;
-      }
-      if (DirectionId != "") {
-        employeesData["DirectionId"] = DirectionId;
-      }
+      
+      employeesData["AgenceId"] = AgenceId || null;
+      employeesData["ServicesActiviteId"] = ServicesActiviteId || null;
+      employeesData["PilotageId"] = PilotageId || null;
+      employeesData["DirectionId"] = DirectionId || null;
 
       const TagsPayload = Tags?.map(t => ({ TagId: t, EmployeeId: req.params.id })) || [];
       Employees.update(employeesData, { where: { id: req.params.id } })

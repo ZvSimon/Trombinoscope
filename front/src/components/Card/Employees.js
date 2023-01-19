@@ -11,8 +11,8 @@ const Employees = ({ sid }) => {
   return (
         <>
         <div className="diremplist">
-            {empdata.map((semp)=>(
-              <Emp employee={semp}/>
+            {empdata.map((semp,index)=>(
+              <Emp key={index} employee={semp}/>
             ))}
         </div>
         </>
