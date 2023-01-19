@@ -92,7 +92,7 @@ const Navbar = (props) => {
             <ListItem disablePadding>
               <ListItemButton
                 components="login"
-                to={`/login`}
+                to={`/Se-connecter`}
                 sx={{ textAlign: "center", color: "primary.contrastText" }}
               >
                 <ListItemText primary="Se connecter" />
@@ -182,7 +182,7 @@ const Navbar = (props) => {
                   "&:hover": { borderBottom: 0 },
                 }}
                 component={Link}
-                to={`/login`}
+                to={`/Se-connecter`}
                 color={"secondary"}
               >
                 {"Se connecter"}

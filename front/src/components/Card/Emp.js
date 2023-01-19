@@ -30,7 +30,7 @@ const Emp = ({ employee }) => {
         <h4>{employee.name}</h4>
 
         <p>{agence?.city}</p>
-        <NavLink to="/employee" state={{ data: employee }}>
+        <NavLink to="/Details" state={{ data: employee }}>
             Fiche détaillée
         </NavLink>
        

@@ -88,7 +88,7 @@ const Direction = (employee) => {
            <h4>{ce.name}</h4>
            <p>{agence?.city}</p>
    
-            <NavLink to="/employee" state={{ data: ce }}>
+            <NavLink to="/Details" state={{ data: ce }}>
                Fiche détaillée
            </NavLink>
           
@@ -97,10 +97,12 @@ const Direction = (employee) => {
       </div>
       {servicelist.map((e) =>
         e.map((data) => (
+          
           <>
             <div className="servicename">
               <h2>{data.name}</h2>
             </div>
+            
             <Employees sid={data.id} />
           </>
         ))

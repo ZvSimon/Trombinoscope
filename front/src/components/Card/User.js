@@ -37,7 +37,7 @@ const User = ({ employee, setActif, setupdated }) => {
     }
   }, []);
   return (
-    <NavLink to="/direction" state={{ data: employee.DirectionId }}>
+    <NavLink to="/Direction" state={{ data: employee.DirectionId }}>
       <div className="user">
         <p>{service?.name}</p>
         

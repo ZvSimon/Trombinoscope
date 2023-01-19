@@ -37,23 +37,27 @@ const Home = () => {
       >
         <div className="usercontainer ceo">
           {empceo?.map((employee) => {
+            if(employee.active ==true){
             return <User key={employee.id} employee={employee} />;
-          })}
+          }})}
         </div>
         <div className="usercontainer pilotage">
           {emppilotage?.map((employee) => {
+            if(employee.active){
             return <User key={employee.id} employee={employee} />;
-          })}
+          }})}
         </div>
         <div className="usercontainer pilotage">
           {empchief?.map((employee) => {
+            if(employee.active ){
             return <User key={employee.id} employee={employee} />;
-          })}
+          }})}
         </div>
         <div className="usercontainer pilotage">
           {empservices?.map((employee) => {
-            return <User key={employee.id} employee={employee} />;
-          })}
+          if(employee.active){
+            return <User key={employee.id} employee={employee} />
+          }})}
         </div>
       </Box>
     </Box>

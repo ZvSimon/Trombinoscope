@@ -9,6 +9,12 @@ a {
 .css-mf1cb5-MuiButtonBase-root-MuiIconButton-root{
     color:#CBB780FF;
 }
+.show_data{
+    border:solid;
+    border-radius:10px;
+    border-color:black;
+    background-color: lightgray !important;
+}
 .back{
     color:#CBB780FF;
     background-color: black !important;
