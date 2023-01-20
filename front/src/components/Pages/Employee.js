@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Avatar, IconButton, Typography, Box, Badge } from "@mui/material";
 
 import img from "../../assets/image/gallery-mod.webp";
-import "./employee.css";
+
 import { TagFaces } from "@mui/icons-material";
 const Employee = () => {
   const location = useLocation();

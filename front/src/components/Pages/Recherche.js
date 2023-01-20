@@ -19,9 +19,10 @@ const Employees = () => {
   useEffect(() => {
     const initialRequests = [
       axios.get("/employees"),
-      axios.get("/services/"),
-      axios.get("/agences/"),
+      axios.get("/services"),
+      axios.get("/agences"),
       axios.get("/directions"),
+      axios.get("/tags"),
     ];
     Promise.all(initialRequests).then((responses) => {
       const temp = [];
@@ -96,6 +97,7 @@ const Employees = () => {
                 employee?.service?.name,
                 employee?.direction?.name,
                 employee?.agence?.city,
+                employee?.Tags.map(obj=> obj.name).join(),
               ]
                 .filter((item) => item != null)
                 .map((str) => str.toLowerCase());
@@ -104,6 +106,7 @@ const Employees = () => {
                   return true;
                 }
               }
+              console.log({employee});
               return false;
             })
             .filter((e) => e.active === true)

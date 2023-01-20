@@ -1,5 +1,7 @@
 const db = require("../models");
 const Directions = db.directions;
+const Services = db.services;
+// const Services_Direction = db.services_direction;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -136,4 +138,23 @@ exports.findAllPublished = (req, res) => {
                     err.message || "Some error occurred while retrieving tutorials.",
             });
         });
+};
+
+// Find all Direction-belinging-services Tutorials
+exports.findAllDirectionServices = (req, res) => {
+    Directions.findAll(
+    {
+      include: [{
+        model: Services,
+      }],
+    })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
 };

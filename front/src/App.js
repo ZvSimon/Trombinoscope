@@ -1,12 +1,12 @@
 import "./App.css";
 import Navbar from "./components/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Pages/Home";
-import Ajouter from "./components/Pages/Ajouter";
 import Accueil from "./components/Pages/Accueil";
-import Employees from "./components/Pages/Employees";
+import Ajouter from "./components/Pages/Ajouter";
+
+import Recherche from "./components/Pages/Recherche";
 // import Box from "@mui/material/Box";
-import Login from "./components/Pages/Login";
+import Connexion from "./components/Pages/Connexion";
 import Direction from "./components/Pages/Direction";
 import Employee from "./components/Pages/Employee";
 
@@ -25,13 +25,13 @@ const App = () => {
         component={"div"}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Accueil" element={<Home />} />
+          <Route path="/" element={<Accueil />} />
+          <Route path="/Accueil" element={<Accueil/>} />
           <Route path="/Ajouter" element={<Ajouter />} />
-          <Route path="/Rechercher" element={<Employees />} />
+          <Route path="/Rechercher" element={<Recherche />} />
           <Route path="/Direction" element={<Direction />} />
           <Route path="/Details" element={<Employee />} />
-          <Route path="/Se-connecter" element={<Login />} />
+          <Route path="/Se-connecter" element={<Connexion />} />
         </Routes>
       </div>
     </Router>

@@ -4,12 +4,14 @@ import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import logo from "../../assets/image/logo.jpg";
 import {
+  Alert,
   Avatar,
   Box,
   Button,
   Card,
   CardContent,
   Grid,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -40,67 +42,136 @@ const Ajouter = () => {
   const [services, setServices] = useState([]);
   const [pilotages, setPilotages] = useState([]);
   const [directions, setDirections] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [directionServicesList, setDirectionServicesList] = useState([]);
+
+  const [alertMsg, setAlertMsg] = useState({ message: "", type: "info" });
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event) => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     axios.get("/agences").then((res) => setAgences(res.data));
     axios.get("/tags").then((res) => setTags(res.data));
     axios.get("/services").then((res) => setServices(res.data));
     axios.get("/pilotages").then((res) => setPilotages(res.data));
     axios.get("/directions").then((res) => setDirections(res.data));
+    axios.get("/employees").then((res) => setEmployees(res.data));
+    axios
+      .get("/directions/direction-services")
+      .then((res) => setDirectionServicesList(res.data));
   }, []);
+
   const ImageUpModal = (e) => {
     e.preventDefault();
     setModalShow(true);
   };
 
+  const validateForm = () => {
+    if (pilotage) {
+      if (employees.find((emp) => emp.PilotageId === pilotage?.id)) {
+        return { message: "Impossible", type: "error", isApproved: false };
+      }
+    } else if (direction && service) {
+      if (
+        employees.find(
+          (emp) =>
+            emp.DirectionId === direction?.id &&
+            emp.ServicesActiviteId === service?.id &&
+            service?.id === 18
+        )
+      ) {
+        return { message: "Impossible", type: "error", isApproved: false };
+      }
+    }
+    return { message: "Success!", type: "success", isApproved: true };
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log("This is our Image : " + image);
-    const formData = new FormData();
-    const data = {
-      name: name,
-      surname: surname,
-      email: email,
-      mobilefixe: mobilefixe,
-      mobile: mobile,
-      Tags: inputTags.map((inputTag) => JSON.stringify(inputTag)).join("|"),
-      AgenceId: agence?.id ?? "",
-      PilotageId: pilotage?.id ?? "",
-      DirectionId: direction?.id ?? "",
-      ServicesActiviteId: service?.id ?? "",
-      image: image ?? "",
-      active: true,
-    };
-    console.log(data);
-    for (const item in data) {
-      formData.append(item, data[item]);
-    }
-    const config = { headers: { "content-type": "multipart/from-data" } };
-    axios
-      .post("/employees", formData, config)
-      .then((res) => {
-        navigate("/");
-      })
-      .catch(function (error) {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      });
-  };
+    const { isApproved, message, type } = validateForm();
 
+    setAlertMsg({ message, type });
+    setOpen(true);
+
+    if (isApproved) {
+      console.log("This is our Image : " + image);
+      const formData = new FormData();
+      const data = {
+        name: name,
+        surname: surname,
+        email: email,
+        mobilefixe: mobilefixe,
+        mobile: mobile,
+        Tags: inputTags.map((inputTag) => JSON.stringify(inputTag)).join("|"),
+        AgenceId: agence?.id ?? "",
+        PilotageId: pilotage?.id ?? "",
+        DirectionId: direction?.id ?? "",
+        ServicesActiviteId: service?.id ?? "",
+        image: image ?? "",
+        active: true,
+      };
+      console.log(data);
+      for (const item in data) {
+        formData.append(item, data[item]);
+      }
+      const config = { headers: { "content-type": "multipart/from-data" } };
+      axios
+        .post("/employees", formData, config)
+        .then((res) => {
+          navigate("/");
+        })
+        .catch(function (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+    }
+  };
+  console.log({ directionServicesList });
+  console.log({ pilotage });
+  console.log({ employees });
+
+  const preparedServicesOptions = () => {
+    const options = services?.map((s) => {
+      return { label: s.name, ...s };
+    });
+
+    if (direction) {
+      const selectedDirection = directionServicesList.find(
+        (dirS) => dirS.id === direction.id
+      );
+      if (selectedDirection) {
+        const selectedDirectionServices = selectedDirection.Services_Activites
+        console.log({ services });
+        console.log({ selectedDirectionServices });
+        return options.filter(function (o1) {
+          return selectedDirectionServices.some(function (o2) {
+            return o1.id == o2.id;
+          });
+        });
+      }
+      return options;
+    } else {
+      return options;
+    }
+  };
   return (
     <Box
       sx={{
@@ -221,7 +292,10 @@ const Ajouter = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      onChange={(e, nv) => setDirection(nv)}
+                      onChange={(e, nv) => {
+                        setDirection(nv)
+                        setService("")
+                      }}
                       inputValue={inputDirection}
                       onInputChange={(e, nv) => setInputDirection(nv)}
                       disablePortal
@@ -238,11 +312,10 @@ const Ajouter = () => {
                     <Autocomplete
                       onChange={(e, nv) => setService(nv)}
                       inputValue={inputService}
+                      value={service}
                       onInputChange={(e, nv) => setInputService(nv)}
                       disablePortal
-                      options={services?.map((s) => {
-                        return { label: s.name, ...s };
-                      })}
+                      options={preparedServicesOptions()}
                       renderInput={(params) => (
                         <TextField {...params} label="Service" />
                       )}
@@ -299,6 +372,15 @@ const Ajouter = () => {
           </Card>
         </Grid>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity={alertMsg.type}
+          sx={{ width: "100%" }}
+        >
+          {alertMsg.message}
+        </Alert>
+      </Snackbar>
       {ModalShow ? (
         <Modal setprofilePicture={setImage} setModalShow={setModalShow} />
       ) : null}

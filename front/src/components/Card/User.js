@@ -37,14 +37,17 @@ const User = ({ employee, setActif, setupdated }) => {
         .then((res) => setTag(res.data));
     }
   }, []);
+  
   return (
-    <NavLink to="/Direction" state={{ data: employee.DirectionId }}>
+    
+     <NavLink to= {employee.ServicesActiviteId ==17 || employee.PilotageId ? employee.PilotageId   :"/Direction" } state={{ data: employee.DirectionId  }}>
       <div className="user">
+      <p>{direction?.name}</p>
         <p>{service?.name}</p>
 
         <p>{pilotage?.name}</p>
-        <h4>{employee.name}</h4>
-        <p>{direction?.name}</p>
+        <h4>{employee.surname + " " + employee.name}</h4>
+        
         <div className="cart_img">
           <Avatar
             color={"primary"}
@@ -57,7 +60,7 @@ const User = ({ employee, setActif, setupdated }) => {
             }}
             src={`http://localhost:8080/${employee.image}`}
           >
-            <Typography variant={"h4"}>
+            <Typography variant={"h5"}>
               {employee.image === null &&
                 employee.name[0] + employee.surname[0]}
             </Typography>
@@ -65,6 +68,7 @@ const User = ({ employee, setActif, setupdated }) => {
         </div>
       </div>
     </NavLink>
+              
   );
 };
 

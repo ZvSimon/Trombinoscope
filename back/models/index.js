@@ -26,6 +26,8 @@ db.directions = require("./Directions.model.js")(sequelize, Sequelize);
 db.employees = require("./Employees.model.js")(sequelize, Sequelize);
 db.pilotages = require("./Pilotages.model.js")(sequelize, Sequelize);
 db.services = require("./Services.model.js")(sequelize, Sequelize);
+db.services_direction=require("./ServicesDirection.model")(sequelize,Sequelize);
+
 db.employees.hasOne(db.agences);
 db.agences.hasMany(db.employees);
 db.employees.belongsToMany(db.tags, { through: db.employees_tags });
@@ -37,6 +39,9 @@ db.employees.belongsTo(db.directions);
 db.directions.hasMany(db.employees);
 db.directions.hasMany(db.services);
 db.services.belongsTo(db.directions);
+db.directions.belongsToMany(db.services, { through: db.services_direction });
+db.services.belongsToMany(db.directions, { through: db.services_direction });
+
 db.pilotages.belongsToMany(db.services, {
   through: "Associer" /* options */,
 });

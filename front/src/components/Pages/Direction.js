@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Employees from "../Card/Employees";
 import { NavLink } from "react-router-dom";
 import axios from "../../axios";
-import "./direction.css";
+
 import "../Card/emp.css"
 const Direction = (employee) => {
   const directionbyservice = [

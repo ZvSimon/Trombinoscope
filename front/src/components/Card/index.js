@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Avatar, IconButton, Typography, Box, Badge } from "@mui/material";
+import {
+  Avatar,
+  IconButton,
+  Typography,
+  Box,
+  Badge,
+  Collapse,
+} from "@mui/material";
 import axios from "../../axios";
 import { Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
 import EditCard from "../EditCard";
@@ -10,7 +17,7 @@ const Card = ({ employee, setActif, setupdated }) => {
   const isadmin = localStorage.getItem("logsuccess");
   const [service, setService] = useState(employee?.service);
   const [editMode, setEditMode] = useState(false);
-  const [collapse, setCollapse] = useState(true);
+  const [collapse, setCollapse] = useState(false);
   const [agence, setAgence] = useState(employee?.agence);
   const [direction, setDirection] = useState(employee?.direction);
   const [active, setactive] = useState(true);
@@ -108,9 +115,8 @@ const Card = ({ employee, setActif, setupdated }) => {
               )}
             </div>
           </div>
-          {!collapse && (
+          <Collapse in={collapse} timeout="auto" unmountOnExit>
             <div className="show_data">
-              
               <Typography>{employee.email}</Typography>
               <Typography>Fixe: {employee.mobilefixe}</Typography>
               <Typography>Mobile: {employee.mobile}</Typography>
@@ -123,9 +129,8 @@ const Card = ({ employee, setActif, setupdated }) => {
                   <Badge color="secondary" badgeContent={t.name}></Badge>
                 </div>
               ))}
-              
             </div>
-          )}
+          </Collapse>
         </div>
       )}
     </>

@@ -1,30 +1,66 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
-import Card from "../Card";
-import {Box} from "@mui/material";
-const Accueil = () => {
+import User from "../Card/User";
+import { Box } from "@mui/material";
+
+const Home = () => {
   const [employees, setEmployees] = useState([]);
-  const [updated, setupdated] = useState(0)
   useEffect(() => {
     axios.get("/employees").then((res) => setEmployees(res.data));
-  }, [updated]);
+  }, []);
 
-  const activeemp = employees.filter((emp) => emp.active === true);
+  const empceo = employees.filter(
+    (emp) => emp.ServicesActiviteId === 17 && emp.active !== false
+  );
+  const emppilotage = employees.filter(
+    (emp) => emp.PilotageId !== null && emp.active !== false
+  );
+  const empchief = employees.filter(
+    (emp) => emp.ServicesActiviteId === 18 && emp.active !== false
+  );
+  // const empservices = employees.filter(
+  //   (emp) =>
+  //     (emp.ServicesActiviteId !== 17) &
+  //     (emp.ServicesActiviteId !== 18) &
+  //     (emp.PilotageId === null)
+  // );
 
   return (
-    <Box sx={{
-      backgroundColor: "primary.contrastText",
-      display: "flex",
-      justifyContent: "center",
-      minHeight: "calc(100vh - 80px)",
-      p: 3,
-  }} component={"div"}>
-    <div className="our_cart">
-      {activeemp?.map((employee) => {
-        return <Card setupdated={setupdated} key={employee.id} employee={employee} />;
-      })}
-    </div>
+    <Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.contrastText",
+          minHeight: "calc(100vh - 80px)",
+          p: 3,
+        }}
+        component={"div"}
+      >
+        <div className="usercontainer ceo">
+          {empceo?.map((employee) => {
+            if(employee.active ==true){
+            return <User key={employee.id} employee={employee} />;
+          }})}
+        </div>
+        <div className="usercontainer pilotage">
+          {emppilotage?.map((employee) => {
+            if(employee.active){
+            return <User key={employee.id} employee={employee} />;
+          }})}
+        </div>
+        <div className="usercontainer pilotage">
+          {empchief?.map((employee) => {
+            if(employee.active ){
+            return <User key={employee.id} employee={employee} />;
+          }})}
+        </div>
+        {/* <div className="usercontainer pilotage">
+          {empservices?.map((employee) => {
+          if(employee.active){
+            return <User key={employee.id} employee={employee} />
+          }})}
+        </div> */}
+      </Box>
     </Box>
   );
 };
-export default Accueil;
+export default Home;
