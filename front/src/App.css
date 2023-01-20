@@ -18,6 +18,9 @@ a {
     border-color:black;
     background-color: lightgray !important;
 }
+.reactEasyCrop_CropArea{
+    border-radius:50%;
+}
 .back{
     color:#CBB780FF;
     background-color: black !important;
