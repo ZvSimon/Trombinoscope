@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
-import "./employees.css";
-import Emp from "./Emp";
+import axios from "../../../axios";
+import "./index.css";
+import Emp from "../DirectionCard";
 const Employees = ({ sid }) => {
     const [employees, setEmployees] = useState([]);
     useEffect(() => {

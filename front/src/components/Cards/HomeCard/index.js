@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
+import axios from "../../../axios";
 import { NavLink } from "react-router-dom";
-import "./user.css";
+import "./index.css";
 import { Avatar, Typography } from "@mui/material";
 const User = ({ employee, setActif, setupdated }) => {
   const [service, setService] = useState(employee?.service);
@@ -37,17 +37,28 @@ const User = ({ employee, setActif, setupdated }) => {
         .then((res) => setTag(res.data));
     }
   }, []);
-  
+
   return (
-    
-     <NavLink to= {employee.ServicesActiviteId ==17 || employee.PilotageId ? employee.PilotageId   :"/Direction" } state={{ data: employee.DirectionId  }}>
+    <NavLink
+      to={
+        employee.ServicesActiviteId == 17 || employee.PilotageId
+          ? employee.PilotageId
+          : "/Direction"
+      }
+      state={{
+        data: {
+          DirectionId: employee.DirectionId,
+          AgenceId: employee.AgenceId,
+        },
+      }}
+    >
       <div className="user">
-      <p>{direction?.name}</p>
+        <p>{direction?.name}</p>
         <p>{service?.name}</p>
 
         <p>{pilotage?.name}</p>
         <h4>{employee.surname + " " + employee.name}</h4>
-        
+
         <div className="cart_img">
           <Avatar
             color={"primary"}
@@ -68,7 +79,6 @@ const User = ({ employee, setActif, setupdated }) => {
         </div>
       </div>
     </NavLink>
-              
   );
 };
 

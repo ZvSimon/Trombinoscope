@@ -7,13 +7,13 @@ import {
   Badge,
   Collapse,
 } from "@mui/material";
-import axios from "../../axios";
+import axios from "../../../axios";
 import { Edit, ExpandLess, ExpandMore } from "@mui/icons-material";
-import EditCard from "../EditCard";
+import EditCard from "../../EditCard";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "./card.css";
+import "./index.css";
 
-const Card = ({ employee, setActif, setupdated }) => {
+const SearchCard = ({ employee, setActif, setupdated }) => {
   const isadmin = localStorage.getItem("logsuccess");
   const [service, setService] = useState(employee?.service);
   const [editMode, setEditMode] = useState(false);
@@ -32,6 +32,11 @@ const Card = ({ employee, setActif, setupdated }) => {
       axios
         .get("/agences/" + employee.AgenceId)
         .then((res) => setAgence(res.data));
+    }
+    if (employee.DirectionId) {
+      axios
+        .get("/directions/" + employee.DirectionId)
+        .then((res) => setDirection(res.data));
     }
 
     // axios.get("/actif/" + employee.ActifId).then((res) => setActif(res.data));
@@ -117,10 +122,11 @@ const Card = ({ employee, setActif, setupdated }) => {
           </div>
           <Collapse in={collapse} timeout="auto" unmountOnExit>
             <div className="show_data">
-              <Typography>{employee.email}</Typography>
+              <Typography>Email :{employee.email}</Typography>
               <Typography>Fixe: {employee.mobilefixe}</Typography>
               <Typography>Mobile: {employee.mobile}</Typography>
               <Typography>Agence: {agence?.city}</Typography>
+              <Typography>Direction: {direction?.name}</Typography>
               <Typography>Service: {service?.name}</Typography>
               <Typography>Tags: </Typography>
 
@@ -137,4 +143,4 @@ const Card = ({ employee, setActif, setupdated }) => {
   );
 };
 
-export default Card;
+export default SearchCard;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
-import User from "../Card/User";
+import User from "../Cards/HomeCard";
 import { Box } from "@mui/material";
 
 const Home = () => {

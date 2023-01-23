@@ -86,6 +86,7 @@ const Ajouter = () => {
         return { message: "Impossible", type: "error", isApproved: false };
       }
     }
+   
     return { message: "Success!", type: "success", isApproved: true };
   };
 
@@ -222,6 +223,7 @@ const Ajouter = () => {
                       label="Nom"
                       variant="outlined"
                       value={name}
+
                       onChange={(e) => setName(e.target.value)}
                       fullWidth
                       required
@@ -293,8 +295,8 @@ const Ajouter = () => {
                   <Grid item xs={12}>
                     <Autocomplete
                       onChange={(e, nv) => {
-                        setDirection(nv)
-                        setService("")
+                        setDirection(nv);
+                        setService("");
                       }}
                       inputValue={inputDirection}
                       onInputChange={(e, nv) => setInputDirection(nv)}
@@ -376,13 +378,16 @@ const Ajouter = () => {
         <Alert
           onClose={handleClose}
           severity={alertMsg.type}
-          sx={{ width: "100%" }}
+          sx={{ width: "100%",marginTop:"0" }}
         >
           {alertMsg.message}
         </Alert>
       </Snackbar>
       {ModalShow ? (
-        <Modal setprofilePicture={setImage} setModalShow={setModalShow} />
+        <Modal
+          setprofilePicture={setImage}
+          setModalShow={setModalShow}
+        />
       ) : null}
     </Box>
   );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../axios";
+import axios from "../../../axios";
 import { NavLink } from "react-router-dom";
 
-import "./emp.css";
+import "./index.css";
 const Emp = ({ employee }) => {
   const [service, setService] = useState(employee?.service);
   // const [pilotage, setPilotage] = useState(employee?.agence);
@@ -27,7 +27,7 @@ const Emp = ({ employee }) => {
         <div className="empimg">
             <img src={`http://localhost:8080/${employee.image}`} alt="" />
         </div>
-        <h4>{employee.name}</h4>
+        <h4>{employee.surname + " " + employee.name}</h4>
 
         <p>{agence?.city}</p>
         <NavLink to="/Details" state={{ data: employee }}>

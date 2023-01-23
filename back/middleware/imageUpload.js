@@ -3,7 +3,8 @@ const uploader = require("../utilities/fileUploader")
 const avatarUpload = (req, res, next) => {
     const upload = uploader(
         ["image/jpg", "image/jpeg", "image/png"],
-        100000000
+        100000000,
+        req,
     );
     upload.any()(req, res, (err) => {
         if (err) {

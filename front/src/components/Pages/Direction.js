@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Employees from "../Card/Employees";
+import Employees from "../Cards/ServicesCard";
 import { NavLink } from "react-router-dom";
 import axios from "../../axios";
 
-import "../Card/emp.css"
+import "../Cards/DirectionCard/index.css";
 const Direction = (employee) => {
   const directionbyservice = [
     {
@@ -52,25 +52,29 @@ const Direction = (employee) => {
   const location = useLocation();
   const [agence, setAgence] = useState(employee?.agence);
   // const [emp, setEmp] = useState([]);
-  const did = location.state?.data;
+  const { DirectionId, AgenceId } = location.state?.data;
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     axios.get("/employees").then((res) => setEmployees(res.data));
+    axios.get("/agences/" + AgenceId).then((res) => setAgence(res.data));
+
     axios
-      .get("/agences/" + did)
-      .then((res) => setAgence(res.data));
+      .get("/directions/" + DirectionId)
+      .then((res) => setDirection(res.data));
+  }, [DirectionId]);
 
-    axios.get("/directions/" + did).then((res) => setDirection(res.data));
-  }, [did]);
-
-  const dirandservicelist = directionbyservice.filter((e) => e.id === did);
-  const diremp = employees.filter((demp) => demp.DirectionId === did);
+  const dirandservicelist = directionbyservice.filter(
+    (e) => e.id === DirectionId
+  );
+  const diremp = employees.filter((demp) => demp.DirectionId === DirectionId);
   const dirchief = diremp.filter((dchief) => dchief.ServicesActiviteId === 18);
   const servicelist = dirandservicelist.map((d) =>
     d.services.map((aaa) => aaa)
   );
-
+  console.log({ agence });
+  console.log({dirchief});
+  console.log({employee});
   return (
     <div className="directionpage">
       <div className="direction-head">
@@ -85,7 +89,7 @@ const Direction = (employee) => {
             <div className="empimg">
               <img src={`http://localhost:8080/${ce.image}`} alt="" />
             </div>
-            <h4>{ce.name}</h4>
+            <h4>{ce.surname + " " + ce.name}</h4>
             <p>{agence?.city}</p>
 
             <NavLink to="/Details" state={{ data: ce }}>

@@ -60,9 +60,7 @@
       flex-wrap: wrap;
       gap: 5px;
     }
-    .user{
-        
-    }
+    
   }
   @media screen and (max-width: 576px) {
     

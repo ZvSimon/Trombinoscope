@@ -47,12 +47,13 @@ exports.create = (req, res) => {
   }
   Employees.create(employeeData)
     .then((employee) => {
-      Tags.split("|")
-        .map((tag) => JSON.parse(tag))
-        .forEach((tag) => {
-          Employees_Tags.create({ EmployeeId: employee.id, TagId: tag.id });
-        });
-
+      if (Tags != "") {
+        Tags.split("|")
+          .map((tag) => JSON.parse(tag))
+          .forEach((tag) => {
+            Employees_Tags.create({ EmployeeId: employee.id, TagId: tag.id });
+          });
+      }
       res.send(employee);
     })
 
@@ -67,13 +68,14 @@ exports.create = (req, res) => {
 exports.findAll = async (req, res) => {
   const id = req.query.id;
   const condition = id ? { id: { [Op.like]: `%${id}%` } } : null;
-  Employees.findAll(
-    {
-      where: condition,
-      include: [{
+  Employees.findAll({
+    where: condition,
+    include: [
+      {
         model: Tags,
-      }],
-    })
+      },
+    ],
+  })
     .then((data) => {
       res.send(data);
     })
@@ -129,26 +131,22 @@ exports.update = (req, res) => {
         mobile: mobile ?? data.mobile,
         active: active ?? data.active,
       };
-      
+
       employeesData["AgenceId"] = AgenceId || null;
       employeesData["ServicesActiviteId"] = ServicesActiviteId || null;
       employeesData["PilotageId"] = PilotageId || null;
       employeesData["DirectionId"] = DirectionId || null;
 
-      const TagsPayload = Tags?.map(t => ({ TagId: t, EmployeeId: req.params.id })) || [];
+      const TagsPayload =
+        Tags?.map((t) => ({ TagId: t, EmployeeId: req.params.id })) || [];
       Employees.update(employeesData, { where: { id: req.params.id } })
         .then(async (updateData) => {
-          await Employees_Tags.destroy(
-            {
-              where: { EmployeeId: req.params.id }
-            }
-          );
-          await Employees_Tags.bulkCreate(
-            TagsPayload,
-            {
-              updateOnDuplicate: ["TagId"],
-            }
-          );
+          await Employees_Tags.destroy({
+            where: { EmployeeId: req.params.id },
+          });
+          await Employees_Tags.bulkCreate(TagsPayload, {
+            updateOnDuplicate: ["TagId"],
+          });
           res.status(200).json({
             success: true,
             msg: "Employee info updated successfully",

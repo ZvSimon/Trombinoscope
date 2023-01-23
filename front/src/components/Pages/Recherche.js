@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
-import Card from "../Card";
+import SearchCard from "../Cards/SearchCard";
+
+
 import {
   Box,
   FormControl,
@@ -112,7 +114,7 @@ const Employees = () => {
             .filter((e) => e.active === true)
             .map((employee) => (
               <Grid key={employee.id} item xs={12} sm={6} md={3}>
-                <Card
+                <SearchCard
                   setupdated={setupdated}
                   key={employee.id}
                   employee={employee}
