@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../axios";
 import "./index.css";
-import Emp from "../DirectionCard";
-const Employees = ({ sid }) => {
+import DirectionCard from "../DirectionCard";
+const ServicesCard = ({ sid }) => {
     const [employees, setEmployees] = useState([]);
     useEffect(() => {
         axios.get("/employees").then((res) => setEmployees(res.data));
@@ -12,7 +12,7 @@ const Employees = ({ sid }) => {
         <>
         <div className="diremplist">
             {empdata.map((semp,index)=>(
-              <Emp key={index} employee={semp}/>
+              <DirectionCard key={index} employee={semp}/>
             ))}
         </div>
         </>
@@ -21,4 +21,4 @@ const Employees = ({ sid }) => {
    );
 };
 
-export default Employees;
+export default ServicesCard;

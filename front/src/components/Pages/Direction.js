@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Employees from "../Cards/ServicesCard";
+import ServicesCard from "../Cards/ServicesCard";
 import { NavLink } from "react-router-dom";
 import axios from "../../axios";
 
@@ -107,7 +107,7 @@ const Direction = (employee) => {
               <h2>{data.name}</h2>
             </div>
 
-            <Employees sid={data.id} />
+            <ServicesCard sid={data.id} />
           </div>
         ))
       )}

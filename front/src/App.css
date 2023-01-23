@@ -12,6 +12,13 @@ a {
 .css-vj1n65-MuiGrid-root {
     margin-top: 20px;
 }
+.css-1dslbfu-MuiInputBase-root-MuiOutlinedInput-root{
+    width: 500px !important;
+    height: 60px !important;
+    border-radius: 20px !important;
+    border: solid !important;
+    border-color: white !important;
+}
 .show_data{
     border:solid;
     border-radius:10px;

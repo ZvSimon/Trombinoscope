@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
-import User from "../Cards/HomeCard";
+import HomeCard from "../Cards/HomeCard";
 import { Box } from "@mui/material";
 
 const Home = () => {
@@ -38,19 +38,19 @@ const Home = () => {
         <div className="usercontainer ceo">
           {empceo?.map((employee) => {
             if(employee.active ==true){
-            return <User key={employee.id} employee={employee} />;
+            return <HomeCard key={employee.id} employee={employee} />;
           }})}
         </div>
         <div className="usercontainer pilotage">
           {emppilotage?.map((employee) => {
             if(employee.active){
-            return <User key={employee.id} employee={employee} />;
+            return <HomeCard key={employee.id} employee={employee} />;
           }})}
         </div>
         <div className="usercontainer pilotage">
           {empchief?.map((employee) => {
             if(employee.active ){
-            return <User key={employee.id} employee={employee} />;
+            return <HomeCard key={employee.id} employee={employee} />;
           }})}
         </div>
         {/* <div className="usercontainer pilotage">

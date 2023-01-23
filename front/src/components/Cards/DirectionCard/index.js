@@ -3,7 +3,7 @@ import axios from "../../../axios";
 import { NavLink } from "react-router-dom";
 
 import "./index.css";
-const Emp = ({ employee }) => {
+const DirectionCard = ({ employee }) => {
   const [service, setService] = useState(employee?.service);
   // const [pilotage, setPilotage] = useState(employee?.agence);
   const [agence, setAgence] = useState(employee?.agence);
@@ -38,4 +38,4 @@ const Emp = ({ employee }) => {
   );
 };
 
-export default Emp;
+export default DirectionCard;

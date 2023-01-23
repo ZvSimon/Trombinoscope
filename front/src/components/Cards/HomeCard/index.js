@@ -3,7 +3,7 @@ import axios from "../../../axios";
 import { NavLink } from "react-router-dom";
 import "./index.css";
 import { Avatar, Typography } from "@mui/material";
-const User = ({ employee, setActif, setupdated }) => {
+const HomeCard = ({ employee, setActif, setupdated }) => {
   const [service, setService] = useState(employee?.service);
   const [pilotage, setPilotage] = useState(employee?.pilotage);
   const [tag, setTag] = useState(employee?.tag);
@@ -82,4 +82,4 @@ const User = ({ employee, setActif, setupdated }) => {
   );
 };
 
-export default User;
+export default HomeCard;
