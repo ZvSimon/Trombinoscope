@@ -66,7 +66,7 @@ const Navbar = (props) => {
             <>
               <ListItem disablePadding>
                 <ListItemButton
-                  components="Ajouter"
+                  components="Add"
                   to={`/Ajouter`}
                   sx={{ textAlign: "center", color: "primary.contrastText" }}
                 >

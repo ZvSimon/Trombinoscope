@@ -1,10 +1,10 @@
 import "./App.css";
 import Navbar from "./components/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Accueil from "./components/Pages/Accueil";
-import Ajouter from "./components/Pages/Ajouter";
+import Home from "./components/Pages/Home";
+import Add from "./components/Pages/Add";
 
-import Recherche from "./components/Pages/Recherche";
+import Search from "./components/Pages/Search";
 // import Box from "@mui/material/Box";
 import Connexion from "./components/Pages/Connexion";
 import Direction from "./components/Pages/Direction";
@@ -25,10 +25,10 @@ const App = () => {
         component={"div"}
       >
         <Routes>
-          <Route path="/" element={<Accueil />} />
-          <Route path="/Accueil" element={<Accueil/>} />
-          <Route path="/Ajouter" element={<Ajouter />} />
-          <Route path="/Rechercher" element={<Recherche />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Accueil" element={<Home/>} />
+          <Route path="/Ajouter" element={<Add />} />
+          <Route path="/Rechercher" element={<Search />} />
           <Route path="/Direction" element={<Direction />} />
           <Route path="/Details" element={<Employee />} />
           <Route path="/Se-connecter" element={<Connexion />} />
