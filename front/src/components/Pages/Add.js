@@ -361,7 +361,13 @@ const Ajouter = () => {
                     <Button
                       type="submit"
                       variant="contained"
-                      color="primary"
+                      style={{
+                        border: "solid",
+                        borderColor: "black",
+                        backgroundColor: "#CBB780FF",
+                        color:"black"
+                        
+                      }}
                       fullWidth
                       onClick={onSubmit}
                     >

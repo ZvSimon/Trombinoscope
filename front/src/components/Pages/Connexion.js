@@ -32,6 +32,7 @@ const Log_in = () => {
       justifyContent: "center",
       minHeight: "calc(100vh - 80px)",
       p: 3,
+      fontSize: 'large'
   }} component={"div"}>
     <div className="Form">
       <img
@@ -41,7 +42,7 @@ const Log_in = () => {
         alt="Logo dmax"
       />
       <Grid>
-        <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+        <Card style={{ fontSize: 'large',maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
           <CardContent>
             <Typography gutterBottom variant="h5">
               Se connecter

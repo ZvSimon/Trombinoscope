@@ -60,6 +60,7 @@ const Employee = () => {
     console.log({ tags }),
     console.log({ empTags }),
     console.log({ tags }),
+    
     (
       <div className="empcontainer">
         <button className="gobackbutton" onClick={() => navigate(-1)}>
@@ -81,10 +82,11 @@ const Employee = () => {
           </div>
 
           <div className="card-content">
-            <p>{employee.email}</p>
+            <p>Email :{employee.email}</p>
             <p>Fixe: {employee.mobilefixe}</p>
             <p>Mobile: {employee.mobile}</p>
             <p>Agence: {agence?.city}</p>
+            <p>Direction : {direction?.name}</p>
             <p>Service: {service?.name}</p>
 
             <p>Tags: </p>

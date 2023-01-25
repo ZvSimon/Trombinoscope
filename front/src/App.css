@@ -16,8 +16,8 @@ a {
     width: 500px !important;
     height: 60px !important;
     border-radius: 20px !important;
-    border: solid !important;
-    border-color: white !important;
+    /* border: solid !important;
+    border-color: white !important; */
 }
 .show_data{
     border:solid;
@@ -50,7 +50,7 @@ a {
 text-align:center;
 margin-bottom: 20px;
 display: inline;
-margin-left: 20%;
+margin-left: 25%;
 
 position: relative;
 top: -45px;
@@ -122,7 +122,7 @@ top: -45px;
 }
 .card-header {
     background-image: linear-gradient(to bottom right, #b3943e, #7c6250);
-    padding: 12px 27px 7px !important;
+    padding: 54px 0px 21px !important;
     position: relative;
 }
 .agence {
@@ -138,6 +138,7 @@ top: -45px;
     width: 15rem;
     max-width: 15rem
 }
+
 .card-header h2 {
     color: #FFF;
     font-size: 28px;
@@ -160,10 +161,10 @@ top: -45px;
     border-radius: 0px 0px 50% 0px;
 }
 .employee p{
-    font-size: 18px;
-    line-height: 1.4;
+    font-size: 23px;
+    
     color: #fff;
-    margin: 20px 0px;
+    margin: 27px 5px;
 }
  
 /* .userimg {
@@ -217,13 +218,18 @@ top: -45px;
 .upload_img{
     padding: 8px 20px;
     background: #CBB780FF;
-    color: #fff;
+    color: black;
     font-size: 16px;
     font-weight: bold;
-    border: none;
+    border: solid;
     outline: none;
     border-radius: 6px;
     cursor: pointer;
+    border-color:#000000;
+}
+.css-1omrlxw-MuiPaper-root-MuiCard-root{
+    border:solid;
+    border-color:#000000;
 }
 .userimg{
     position: static;
