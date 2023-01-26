@@ -223,3 +223,4 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+//Employees controller est une classe qui va contenir différentes méthodes.

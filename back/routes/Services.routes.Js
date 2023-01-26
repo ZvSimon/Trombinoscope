@@ -10,3 +10,4 @@ module.exports = (app) => {
     router.delete("/", services.deleteAll);
     app.use("/api/services", router);
 };
+// Appelle aux méthodes des controllers Services.

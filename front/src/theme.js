@@ -14,3 +14,6 @@ const theme = createTheme({
 });
 
 export default theme
+
+// On stock dans des variables des couleurs, pour permettre d'aller plus vite dans le code, de plus, si on change la couleur, cela va s'appliquer partout.
+// Couleur global.

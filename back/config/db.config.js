@@ -12,3 +12,4 @@ module.exports = {
     idle: 10000,
   },
 };
+// Configuration de la connexion à la database. Tout est stockée dans des variables pour protéger les informations sensibles.

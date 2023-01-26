@@ -11,3 +11,4 @@ module.exports = (app) => {
     router.delete("/", directions.deleteAll);
     app.use("/api/directions", router);
 };
+// Appelle aux méthodes des controllers Directions

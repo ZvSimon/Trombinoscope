@@ -11,3 +11,4 @@ module.exports = (app) => {
     router.delete("/", employees.deleteAll);
     app.use("/api/employees", router);
 };
+// Appelle aux méthodes des controllers Employees.

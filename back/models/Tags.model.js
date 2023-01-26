@@ -10,3 +10,4 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 };
+// Définition de la table Tag.

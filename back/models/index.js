@@ -16,7 +16,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 
 const db = {};
-
+// Chargement des définition des tables.
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.employees_tags = require("./EmployeeTag.model.js")(sequelize, Sequelize);
@@ -28,6 +28,7 @@ db.pilotages = require("./Pilotages.model.js")(sequelize, Sequelize);
 db.services = require("./Services.model.js")(sequelize, Sequelize);
 db.services_direction=require("./ServicesDirection.model")(sequelize,Sequelize);
 
+// Relation entre les tables.
 db.employees.hasOne(db.agences);
 db.agences.hasMany(db.employees);
 db.employees.belongsToMany(db.tags, { through: db.employees_tags });

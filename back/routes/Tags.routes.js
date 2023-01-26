@@ -10,3 +10,4 @@ module.exports = (app) => {
   router.delete("/", tags.deleteAll);
   app.use("/api/tags", router);
 };
+// Appelle aux méthodes des controllers Tags.

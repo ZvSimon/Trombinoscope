@@ -602,3 +602,5 @@ module.exports = (db) => {
     ])
     .then(() => console.log("Services_Directions data have been saved"));
 };
+
+// Insertion des données dans les tables. [ Insert value into table...]

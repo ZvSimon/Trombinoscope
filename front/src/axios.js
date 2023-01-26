@@ -8,3 +8,4 @@ export default axios.create({
     "Content-type": "application/json",
   },
 });
+// Envoie les requêtes entre notre back-end et notre front-end. 

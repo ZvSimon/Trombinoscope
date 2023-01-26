@@ -129,3 +129,4 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+//Tags controller est une classe qui va contenir différentes méthodes.

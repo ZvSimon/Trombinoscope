@@ -39,6 +39,7 @@ const HomeCard = ({ employee, setActif, setupdated }) => {
   }, []);
 
   return (
+    // Permet de dire que la redirection est uniquement faite sur les chefs (ie : faut que le ServicesId ne soit pas 17 ou que le PilotageId soit nulle.)
     <NavLink
       to={
         employee.ServicesActiviteId == 17 || employee.PilotageId

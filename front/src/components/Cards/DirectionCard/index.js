@@ -22,6 +22,8 @@ const DirectionCard = ({ employee }) => {
       .get("/directions/" + employee.DirectionId)
       .then((res) => setDirection(res.data));
   }, []);
+  // Ici on return la Card de Direction avec une image, nom et prénom et l'agence si y a. 
+  // Navlink permet de dire que lorsqu'on clique sur Fiche détaillée on est dirigée vers la page Details
   return (
       <div className="emp">
         <div className="empimg">

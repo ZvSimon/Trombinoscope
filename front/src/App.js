@@ -24,6 +24,7 @@ const App = () => {
         }}
         component={"div"}
       >
+        {/* Navigation */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Accueil" element={<Home/>} />

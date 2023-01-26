@@ -131,3 +131,4 @@ exports.findAllPublished = (req, res) => {
             });
         });
 };
+// Pilotages controller est une classe qui va contenir différentes méthodes.

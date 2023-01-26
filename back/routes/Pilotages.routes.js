@@ -10,3 +10,4 @@ module.exports = (app) => {
     router.delete("/", pilotage.deleteAll);
     app.use("/api/pilotages", router);
 };
+// Appelle aux méthodes des controllers Pilotages.
