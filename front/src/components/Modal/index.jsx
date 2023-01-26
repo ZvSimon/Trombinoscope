@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg, { generateDownload } from "./uitils/uitils/cropImage";
 import { dataURLtoFile } from "./uitils/uitils/dataURLtoFile";
-import "./modal.css";
+import "./index.css";
 import img from "../../assets/image/up.jpg";
 
 const Modal = ({ setprofilePicture, setModalShow }) => {
