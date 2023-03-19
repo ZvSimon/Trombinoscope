@@ -7,24 +7,37 @@ Clone the project
   git clone git@github.com:ZvSimon/Trombinoscope-DMAX.git
 ```
 
+
 Go to the project directory
 
 ```bash
   cd Trombinoscope-DMAX
-  cd front
-  cd back (in an other terminal)
+  
+```
+```bash
+  Ensuite on entre dans le front-end : cd front
+  Puis dans un second terminal : cd back
 ```
 
 Install dependencies
 
 ```bash
-  npm install for front and back
+  Une fois dans le front : npm install
+  Une fois dans le back : npm install
 ```
-
-Start the server
 
 ```bash
-  npm start for front and back
+  Entrez les informations de la connexion database dans le .env
+  Une fois l'initialisation du projet effectuer.
 ```
+```bash
+  On enchaîne avec pour le front-end : npm start
+  On enchaîne avec pour le back-end : npm start
+  [ On vient de lancer le front-end et le back-end]
+  
+  Attention : Allez dans le fichier server.js et après avoir envoyé les données du dossier init.js , on le passe en commentaire. ( // ) 
+```
+
+
 
 
