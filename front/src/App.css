@@ -19,6 +19,9 @@ a {
     /* border: solid !important;
     border-color: white !important; */
 }
+.css-19pdx49-MuiButtonBase-root-MuiButton-root{
+    font-weight: bold !important;
+}
 .show_data{
     border:solid;
     border-radius:10px;

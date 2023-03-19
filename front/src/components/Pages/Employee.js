@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Avatar, IconButton, Typography, Box, Badge } from "@mui/material";
+import { Badge } from "@mui/material";
 
 
 
-import { TagFaces } from "@mui/icons-material";
+
 const Employee = () => {
   const location = useLocation();
 
@@ -54,7 +54,9 @@ const Employee = () => {
     employee.AgenceId,
     employee.PilotageId,
     employee.DirectionId,
-    employee.Tags,
+    // employee.Tags,
+    employee.TagId,
+
   ]);
   return (
     console.log({ tags }),
@@ -82,7 +84,7 @@ const Employee = () => {
           </div>
 
           <div className="card-content">
-            <p>Email :{employee.email}</p>
+            <p>Email : {employee.email}</p>
             <p>Fixe: {employee.mobilefixe}</p>
             <p>Mobile: {employee.mobile}</p>
             <p>Agence: {agence?.city}</p>

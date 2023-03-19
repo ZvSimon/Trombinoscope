@@ -3,7 +3,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import { Save } from "@mui/icons-material";
 import axios from "../../axios";
 import Autocomplete from "@mui/material/Autocomplete";
-import "./editcard.css";
+import "./index.css";
 
 
 const EditCard = ({ employee, setEditMode, setupdated }) => {
@@ -97,12 +97,12 @@ const EditCard = ({ employee, setEditMode, setupdated }) => {
     }, 1000);
   }, [employee]);
 
-  console.log({ tags });
-  console.log({ empTags });
-  console.log({ agence });
-  console.log({ pilotage });
-  console.log({ direction });
-  console.log({ employee });
+  // console.log({ tags });
+  // console.log({ empTags });
+  // console.log({ agence });
+  // console.log({ pilotage });
+  // console.log({ direction });
+  // console.log({ employee });
 
   function getSelectedTagOptions() {
     return tags.filter(function (o1) {

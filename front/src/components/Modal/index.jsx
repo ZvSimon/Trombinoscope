@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import Cropper from "react-easy-crop";
-import getCroppedImg, { generateDownload } from "./uitils/uitils/cropImage";
+import getCroppedImg from "./uitils/uitils/cropImage";
 import { dataURLtoFile } from "./uitils/uitils/dataURLtoFile";
 import "./index.css";
 import img from "../../assets/image/up.jpg";
@@ -29,7 +29,7 @@ const Modal = ({ setprofilePicture, setModalShow }) => {
     }
   };
 
-  const onDownload = () => {};
+  
 
   const onUpload = async () => {
     if (!image) {

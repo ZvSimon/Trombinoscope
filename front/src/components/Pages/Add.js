@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Modal from "../modal/Modal";
+import Modal from "../Modal";
 
 const Ajouter = () => {
   const navigate = useNavigate();

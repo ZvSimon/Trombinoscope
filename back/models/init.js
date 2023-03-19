@@ -24,7 +24,7 @@ module.exports = (db) => {
       { id: 3, name: "Direction des Opérations France" },
       { id: 4, name: "Direction des RH France" },
     ])
-    .then(() => console.log("Directions data have been saved"));
+    .then(() => console.log("Directions sont sauvegardés."));
 
   db.pilotages
     .bulkCreate([
@@ -41,7 +41,7 @@ module.exports = (db) => {
       { id: 8, name: "Ressources Humaines" },
       { id: 9, name: "Directeur Général" },
     ])
-    .then(() => console.log("Pilotages data have been saved"));
+    .then(() => console.log("Pilotages sont sauvegardés."));
 
   db.services
     .bulkCreate([
@@ -64,7 +64,7 @@ module.exports = (db) => {
       { id: 17, name: "PDG DMAX France" },
       { id: 18, name: "Chef" },
     ])
-    .then(() => console.log("Services data have been saved"));
+    .then(() => console.log("Services sont sauvegardés."));
   db.tags
     .bulkCreate([
       { id: 1, name: "Téléphonie" },

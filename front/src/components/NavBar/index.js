@@ -189,7 +189,7 @@ const Navbar = (props) => {
               </Button>
             )}
           </Box>
-          <Button color={"primary"}>zizi</Button>
+          <Button color={"primary"}></Button>
         </Toolbar>
       </AppBar>
       <Box component="nav">
